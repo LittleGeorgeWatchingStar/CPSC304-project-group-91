@@ -23,26 +23,26 @@ public class DBDriver {
     }
 
     public boolean connect(){
-        {
-            String userName = "ora_u8h0b";
-            String password = "a43328153";
-            String connectURL = "jdbc:oracle:thin:@localhost.ugrad.cs.ubc.ca:1522:ug";
 
-            try
-            {
-                connection = DriverManager.getConnection(connectURL,userName,password);
+        return true;
 
-                System.out.println("\nConnected to Oracle!");
-                return true;
-            }
-            catch (SQLException ex)
-            {
-                System.out.println("Message: " + ex.getMessage());
-                return false;
-            }
-        }
+//        {
+//            String userName = "ora_u8h0b";
+//            String password = "a43328153";
+//            String connectURL = "jdbc:oracle:thin:@localhost.ugrad.cs.ubc.ca:1522:ug";
+//
+//            try
+//            {
+//                connection = DriverManager.getConnection(connectURL,userName,password);
+//
+//                System.out.println("\nConnected to Oracle!");
+//                return true;
+//            }
+//            catch (SQLException ex)
+//            {
+//                System.out.println("Message: " + ex.getMessage());
+//                return false;
+//            }
+//        }
     }
-
-
-
 }
