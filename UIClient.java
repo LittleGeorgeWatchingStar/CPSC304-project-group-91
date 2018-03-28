@@ -134,7 +134,7 @@ public class UIClient extends JFrame implements ActionListener {
 
             this.dispose();
 
-            UIReg = new UIRegister();
+            UIReg = new UIRegister(con);
 
 
         }
