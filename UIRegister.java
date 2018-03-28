@@ -3,7 +3,9 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 
+
 import java.sql.Connection;
+
 import java.awt.event.*;
 import java.time.Month;
 import java.time.Year;
@@ -57,7 +59,7 @@ public class UIRegister extends JFrame implements ActionListener {
         cdtcard.setText("Your Credit Card Please");
         cdtcard.setBounds(20, 150, 180, 45);
         tcdtcard = new JTextField(10);
-        tcdtcard.setBounds(20, 180, 150, 22);
+        tcdtcard.setBounds(20, 180, 170, 22);
         tcdtcard.setHorizontalAlignment(JLabel.CENTER);
 
         cvv = new JLabel();
@@ -213,11 +215,10 @@ public class UIRegister extends JFrame implements ActionListener {
         setSize(570, 400);
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Welcome");
+        setTitle("Express Service Client Register");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         // 2017 Quan Zhang, David Chen all rights reserved
-
     }
 
 
@@ -289,6 +290,7 @@ public class UIRegister extends JFrame implements ActionListener {
             }
         }
 
+
         if(e.getSource() == registerButton){
             Calendar cal = Calendar.getInstance();
             int yearNow = cal.get(Calendar.YEAR);
@@ -336,6 +338,7 @@ public class UIRegister extends JFrame implements ActionListener {
                         "Failed", JOptionPane.WARNING_MESSAGE,img2);
                 return;
             }
+
         }
 
     }

@@ -14,6 +14,7 @@ public class UIClient extends JFrame implements ActionListener {
     private UIRegister UIReg;
     private Connection con;
     private Register register;
+    private UIClientService UIOpenClient;
 
 
     public UIClient(Connection con) {
@@ -116,6 +117,9 @@ public class UIClient extends JFrame implements ActionListener {
                         ImageIcon img1 = new ImageIcon("12.jpg");
                         JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
                                 JOptionPane.INFORMATION_MESSAGE,img1);
+
+                        UIOpenClient = new UIClientService();
+
                     }else {
                         ImageIcon img2 = new ImageIcon("13.jpg");
                         JOptionPane.showMessageDialog(null, "Nope, wrong password",
