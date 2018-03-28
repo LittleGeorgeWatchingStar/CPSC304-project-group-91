@@ -22,7 +22,6 @@ public class UIRegister extends JFrame implements ActionListener {
     private Connection con;
     private Register register;
 
-
     public UIRegister(Connection con) {
         this.con = con;
         register = new Register(con);
@@ -169,7 +168,7 @@ public class UIRegister extends JFrame implements ActionListener {
 
 
         registerButton = new JButton("Register Now");
-        registerButton.setBounds(240, 310, 80, 30);
+        registerButton.setBounds(240, 310, 150, 30);
         registerButton.setEnabled(true);
         registerButton.addActionListener(this);
 
@@ -233,9 +232,6 @@ public class UIRegister extends JFrame implements ActionListener {
         spwd = tpwd.getText();
         scpwd = tcpwd.getText();
 
-
-
-
         if (e.getSource() == cmonth) {
             if (cmonth.getSelectedIndex() == 0) {
                 monthSelected = 1;
@@ -263,7 +259,6 @@ public class UIRegister extends JFrame implements ActionListener {
                 monthSelected = 12;
             }
         }
-
 
         if (e.getSource() == cyear) {
             if (cyear.getSelectedIndex() == 0) {

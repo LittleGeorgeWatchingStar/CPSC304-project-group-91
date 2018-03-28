@@ -10,7 +10,7 @@ public class UIbasic extends JFrame implements ActionListener {
     private JTextField name;
     private JPasswordField password;
 
-    private SendPackage sndpkt;
+    private UIEmployee employeePage;
 
     //private UIClient UIlogin;
 
@@ -109,8 +109,9 @@ public class UIbasic extends JFrame implements ActionListener {
 
                     // open function panel
                     // TODO
-                    sndpkt = new SendPackage();
+                    //sndpkt = new SendPackage();
 
+                    employeePage = new UIEmployee();
                 }
 
                 else {

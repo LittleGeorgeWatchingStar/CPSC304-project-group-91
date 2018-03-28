@@ -14,6 +14,7 @@ public class UIClient extends JFrame implements ActionListener {
     private UIRegister UIReg;
     private Connection con;
     private Register register;
+    private UIClientService UIOpenClient;
 
 
     public UIClient(Connection con) {
@@ -111,11 +112,15 @@ public class UIClient extends JFrame implements ActionListener {
                 PreparedStatement ps = con.prepareStatement("SELECT C_PASSWORD FROM CLIENT_LOGIN WHERE C_NO = ?");
                 ps.setInt(1, Integer.parseInt(yourLogin));
                 ResultSet rs = ps.executeQuery();
+
                 while(rs.next()){
                     if(rs.getInt(1) == Integer.parseInt(yourPassword)){
                         ImageIcon img1 = new ImageIcon("12.jpg");
                         JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
                                 JOptionPane.INFORMATION_MESSAGE,img1);
+
+                        UIOpenClient = new UIClientService();
+
                     }else {
                         ImageIcon img2 = new ImageIcon("13.jpg");
                         JOptionPane.showMessageDialog(null, "Nope, wrong password",

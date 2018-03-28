@@ -44,7 +44,7 @@ public class TrackPackage extends JFrame implements ActionListener {
 
         pktstatus = new JLabel();
         pktstatus.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        pktstatus.setForeground(Color.GREEN);
+        pktstatus.setForeground(Color.BLUE);
         pktstatus.setText("Hello");
         pktstatus.setVisible(true);
         pktstatus.setBounds(280, 110, 250, 45);
