@@ -10,7 +10,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="file://$USER_HOME$/Downloads/classes12" />
+          <root url="jar://$MODULE_DIR$/../Project/classes12.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
