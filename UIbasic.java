@@ -4,27 +4,22 @@ import javax.swing.JPanel;
 
 import java.awt.event.*;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UIbasic extends JFrame implements ActionListener {
     private JButton btnsignin, btnexit;
     private JTextField name;
     private JPasswordField password;
-
+    private Connection con;
     private UIEmployee employeePage;
 
-    //private UIClient UIlogin;
 
-    public JFrame getThisPanel() {
-        return this;
-    }
+    public UIbasic(Connection con) {
+        this.con = con;
 
-    public static void main(String[] args) {
-
-
-        new UIbasic();
-    }
-
-    public UIbasic() {
         // Declare and initialize a JLabel
         JLabel l1 = new JLabel();
         l1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
@@ -93,41 +88,33 @@ public class UIbasic extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Get the text entered in the text field
-        String yourname = name.getText();
-        String your = password.getText();
+        String employeename = name.getText();
+        String employeepwd = password.getText();
 
         // Nothing is entered in the text field
         if (e.getSource() == btnsignin) {
             // 2017 Quan Zhang, David Chen all rights reserved
-            if (yourname.equals("Steve")) {
-                if (your.equals("333")) {
-                    ImageIcon img1 = new ImageIcon("12.jpg");
-                    JOptionPane.showMessageDialog(null, "Haha, yes", "JButton",
-                            JOptionPane.INFORMATION_MESSAGE,img1);
-                    // close login panel
-                    getThisPanel().dispose();
+            try{
+                PreparedStatement ps = con.prepareStatement("SELECT E_PASSWORD FROM EMPLOYEE WHERE E_SSN = ?");
+                ps.setInt(1, Integer.parseInt(employeename));
+                ResultSet rs = ps.executeQuery();
 
-                    // open function panel
-                    // TODO
-                    //sndpkt = new SendPackage();
+                while(rs.next()){
+                    if(rs.getInt(1) == Integer.parseInt(employeepwd)){
+                        ImageIcon img1 = new ImageIcon("12.jpg");
+                        JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
+                                JOptionPane.INFORMATION_MESSAGE,img1);
 
-                    employeePage = new UIEmployee();
+                        employeePage = new UIEmployee(con);
+
+                    }else {
+                        ImageIcon img2 = new ImageIcon("13.jpg");
+                        JOptionPane.showMessageDialog(null, "Nope, wrong password",
+                                "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+                    }
                 }
-
-                else {
-                    ImageIcon img2 = new ImageIcon("13.jpg");
-                    JOptionPane.showMessageDialog(null, "Nope, wrong password",
-                            "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
-
-                    // close login panel
-                    getThisPanel().dispose();
-                }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Not an agent yet? Apply to us now", "JButton",
-                        JOptionPane.INFORMATION_MESSAGE);
-                // close login panel
-                getThisPanel().dispose();
+            }catch(SQLException ex){
+                System.out.println(ex.getMessage());
             }
         }
     }
