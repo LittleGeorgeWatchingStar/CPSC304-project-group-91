@@ -112,12 +112,10 @@ public class UIClient extends JFrame implements ActionListener {
 
                 while(rs.next()){
                     if(rs.getInt(1) == Integer.parseInt(yourPassword)){
-                        ImageIcon img1 = new ImageIcon("12.jpg");
-                        JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
-                                JOptionPane.INFORMATION_MESSAGE,img1);
+                        Client client = new Client(yourLogin,con);
 
                         this.dispose();
-                        UIOpenClient = new UIClientService(con);
+                        UIOpenClient = new UIClientService(client, con);
 
                     }else {
                         ImageIcon img2 = new ImageIcon("13.jpg");

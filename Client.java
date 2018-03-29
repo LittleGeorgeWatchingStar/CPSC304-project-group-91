@@ -1,14 +1,19 @@
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
+
 import java.sql.*;
 
 public class Client {
     private int login;
     private String eMail;
-    private int creditCardNum;
+    public String clientName;
     private int cvv;
-    private int phoneNum;
+    public String[] statusArray = new String[5];
     private String address;
-    private String clientName;
+    public String[] receiverArray = new String[5];
     private Connection con;
+    public String[] orderNums  = new String[5];
+    private long creditCardNum;
+    private long phoneNum;
 
     public Client(String login, Connection con){
         this.login = toInt(login);
@@ -22,14 +27,15 @@ public class Client {
             while(resultSet.next()){
                 clientName = resultSet.getString("C_NAME");
                 eMail = resultSet.getString("C_EMAIL");
-                creditCardNum = resultSet.getInt("C_CCARD");
-                phoneNum = resultSet.getInt("C_PHONE#");
-                cvv = resultSet.getInt("C_CVV");
+                creditCardNum = resultSet.getLong("C_CCARD");
+                phoneNum = resultSet.getLong("C_PHONE#");
+                cvv = resultSet.getInt("CVV");
                 address = resultSet.getString("C_ADDRESS");
             }
             ps.close();
         }catch (SQLException e){
-            System.exit(-1);
+            System.out.println(e.getMessage());
+            System.exit(12);
         }
 
 
@@ -93,13 +99,19 @@ public class Client {
 
     public void viewOrders(){
         try{
-            PreparedStatement ps =con.prepareStatement("SELECT * FROM PACKAGES WHERE CLIENT_NO =?");
+            PreparedStatement ps =con.prepareStatement("SELECT TRACKING_NO, RECEIVER_NAME, STATUS FROM PACKAGES WHERE CLIENT_NO =?");
             ps.setInt(1,login);
             ResultSet rs = ps.executeQuery();
-            //todo
+            int i  = 0;
+            while(rs.next()&&i<5){
+                orderNums[i] = rs.getString("TRACKING_NO");
+                receiverArray[i] = rs.getString("RECEIVER_NAME");
+                statusArray[i] = rs.getString("STATUS");
+                i++;
+            }
             ps.close();
         }catch (SQLException e){
-            //todo
+            System.out.println(e.getMessage());
         }
     }
 
@@ -132,7 +144,7 @@ public class Client {
                         "RECEIVER_NAME =?, RECEIVER_PHONENO =? WHERE TRACKING_NO = ?");
                 ps.setString(1, address);
                 ps.setString(2, clientName);
-                ps.setInt(3, phoneNum);
+                ps.setLong(3, phoneNum);
                 ps.setInt(4, orderNum);
                 ps.executeUpdate();
                 ps.close();
@@ -231,6 +243,48 @@ public class Client {
         try{
             PreparedStatement ps = con.prepareStatement("DELETE FROM CLIENT WHERE C_NO = ?");
             ps.setInt(1,login);
+            ps.executeUpdate();
+            ps.close();
+        }catch(SQLException e){
+            System.out.println("Message: " + e.getMessage());
+            try
+            {
+                con.rollback();
+            }
+            catch (SQLException ex2)
+            {
+                System.out.println("Message: " + ex2.getMessage());
+                System.exit(-1);
+            }
+        }
+    }
+
+    public void changeAddress(String address){
+        try{
+            PreparedStatement ps = con.prepareStatement("UPDATE CLIENT SET C_ADDRESS = ? WHERE C_NO = ?");
+            ps.setString(1,address);
+            ps.setInt(2,login);
+            ps.executeUpdate();
+            ps.close();
+        }catch(SQLException e){
+            System.out.println("Message: " + e.getMessage());
+            try
+            {
+                con.rollback();
+            }
+            catch (SQLException ex2)
+            {
+                System.out.println("Message: " + ex2.getMessage());
+                System.exit(-1);
+            }
+        }
+    }
+
+    public void changePhone(String phone){
+        try{
+            PreparedStatement ps = con.prepareStatement("UPDATE CLIENT SET C_PHONE# = ? WHERE C_NO = ?");
+            ps.setLong(1,Integer.parseInt(phone));
+            ps.setInt(2,login);
             ps.executeUpdate();
             ps.close();
         }catch(SQLException e){
