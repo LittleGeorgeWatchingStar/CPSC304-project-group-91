@@ -186,4 +186,8 @@ public class Manager {
     public void findHeaviestWorkLoad(){
 
     }
+    
+    private int toInt(String s){
+        return Integer.parseInt(s);
+    }
 }
