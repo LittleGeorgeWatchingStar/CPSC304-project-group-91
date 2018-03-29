@@ -18,12 +18,6 @@ public class UIManager extends JFrame implements ActionListener {
 
     private Connection con;
 
-//    private String o1t = "0000";
-//    private String o2t = "0000";
-//    private String o3t = "0000";
-//    private String o4t = "0000";
-//    private String o5t = "0000";
-
     private Client client;
 
     public UIManager(Connection con) {
