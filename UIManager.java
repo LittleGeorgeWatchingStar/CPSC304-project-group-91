@@ -16,12 +16,16 @@ public class UIManager extends JFrame implements ActionListener {
     private JButton btnAdd, btnDelete, btnTrack;
     private JLabel seperationV, seperationH;
 
+    private Tracker tracker;
+    private String pktnum;
+
     private Connection con;
 
     private Client client;
 
     public UIManager(Connection con) {
         this.con = con;
+        tracker = new Tracker(con);
 
         add = new JLabel();
         add.setFont(new Font("Times New Roman", Font.BOLD, 15));
@@ -145,19 +149,19 @@ public class UIManager extends JFrame implements ActionListener {
         statusLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         statusLabel.setForeground(Color.BLACK);
         statusLabel.setText("Track Number");
-        statusLabel.setBounds(300, 450, 100, 45);
+        statusLabel.setBounds(300, 450, 150, 45);
 
         senderLabel = new JLabel();
         senderLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         senderLabel.setForeground(Color.BLACK);
         senderLabel.setText("Track Number");
-        senderLabel.setBounds(300, 490, 100, 45);
+        senderLabel.setBounds(300, 490, 150, 45);
 
         receiverLabel = new JLabel();
         receiverLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         receiverLabel.setForeground(Color.BLACK);
         receiverLabel.setText("Track Number");
-        receiverLabel.setBounds(300, 530, 100, 45);
+        receiverLabel.setBounds(300, 530, 150, 45);
 
         btnAdd = new JButton("Confirm");
         btnAdd.setForeground(Color.BLACK);
@@ -210,6 +214,7 @@ public class UIManager extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        pktnum = tTrackNum.getText();
 
         if(e.getSource() == btnAdd){
 
@@ -218,7 +223,12 @@ public class UIManager extends JFrame implements ActionListener {
 
         }
         if(e.getSource() == btnTrack){
-
+            tracker.track(pktnum);
+            String status = tracker.status;
+            String sender = tracker.sender;
+            statusLabel.setText(status);
+            this.senderLabel.setText(sender);
+            //this.receiverLabel.setText();
         }
     }
 }
