@@ -12,6 +12,7 @@ public class Main extends JFrame implements ActionListener{
     private UIbasic EUIlogin;
     private UIClient UIlogin;
     private TrackPackage trackpkg;
+    private UIManager UImanager;
 
 
     public static void main(String[] args) {
@@ -98,6 +99,7 @@ public class Main extends JFrame implements ActionListener{
             trackpkg = new TrackPackage(connection);
         } else if (e.getSource() == employee) {
             EUIlogin = new UIbasic(connection);
+            UImanager = new UIManager(connection);
         } else if (e.getSource() == client) {
             UIlogin = new UIClient(connection);
         }

@@ -367,7 +367,7 @@ public class UIEmployee extends JFrame implements ActionListener{
         tstatus.setBounds(495, 580, 250, 22);
         tstatus.setHorizontalAlignment(JLabel.CENTER);
 
-        comfirm = new JButton("Add Package");
+        comfirm = new JButton("Delivered Package");
         comfirm.setBounds(330, 620, 150, 30);
         comfirm.setEnabled(true);
         comfirm.addActionListener(this);
