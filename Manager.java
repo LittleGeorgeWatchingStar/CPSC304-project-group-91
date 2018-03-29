@@ -114,6 +114,62 @@ public class Manager {
 
     }
 
+      public void addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+
+
+        try{
+            PreparedStatement preparedStatement= con.prepareStatement ("DELETE FROM COURIER WHERE CO_SSN=?, CO_DLNO = ?, DEV_NO = ?");
+            preparedStatement.setInt(1, Integer.parseInt(CO_SSN));
+            preparedStatement.setInt(2, Integer.parseInt(CO_DLNO));
+            preparedStatement.setInt(3, Integer.parseInt(DEV_NO));
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Message: " + ex.getMessage());
+            try
+            {
+                // undo the insert
+                con.rollback();
+            }
+            catch (SQLException ex2)
+            {
+                System.out.println("Message: " + ex2.getMessage());
+                System.exit(-1);
+            }
+        }
+
+    }
+    
+    public void deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+
+        try{
+            PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO COURIER VALUES (?,?,?)")
+            preparedStatement.setInt(1, Integer.parseInt(CO_SSN));
+            preparedStatement.setInt(2, Integer.parseInt(CO_DLNO));
+            preparedStatement.setInt(3, Integer.parseInt(DEV_NO));
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Message: " + ex.getMessage());
+            try
+            {
+                // undo the insert
+                con.rollback();
+            }
+            catch (SQLException ex2)
+            {
+                System.out.println("Message: " + ex2.getMessage());
+                System.exit(-1);
+            }
+        }
+    }
+
     public void checkOrder(int orderId){
         //todo
         //track specific order with orderId
