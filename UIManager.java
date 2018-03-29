@@ -17,6 +17,7 @@ public class UIManager extends JFrame implements ActionListener {
     private JLabel seperationV, seperationH;
 
     private Tracker tracker;
+    //private Manager manager;
     private String pktnum;
 
     private Connection con;
@@ -26,6 +27,7 @@ public class UIManager extends JFrame implements ActionListener {
     public UIManager(Connection con) {
         this.con = con;
         tracker = new Tracker(con);
+        //manager = new Manager(con);
 
         add = new JLabel();
         add.setFont(new Font("Times New Roman", Font.BOLD, 15));
@@ -148,19 +150,19 @@ public class UIManager extends JFrame implements ActionListener {
         statusLabel = new JLabel();
         statusLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         statusLabel.setForeground(Color.BLACK);
-        statusLabel.setText("Track Number");
+        statusLabel.setText("Unknown");
         statusLabel.setBounds(300, 450, 150, 45);
 
         senderLabel = new JLabel();
         senderLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         senderLabel.setForeground(Color.BLACK);
-        senderLabel.setText("Track Number");
+        senderLabel.setText("Unknown");
         senderLabel.setBounds(300, 490, 150, 45);
 
         receiverLabel = new JLabel();
         receiverLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         receiverLabel.setForeground(Color.BLACK);
-        receiverLabel.setText("Track Number");
+        receiverLabel.setText("Unknown");
         receiverLabel.setBounds(300, 530, 150, 45);
 
         btnAdd = new JButton("Confirm");
@@ -226,9 +228,10 @@ public class UIManager extends JFrame implements ActionListener {
             tracker.track(pktnum);
             String status = tracker.status;
             String sender = tracker.sender;
+            String reciver = tracker.receiver;
             statusLabel.setText(status);
             this.senderLabel.setText(sender);
-            //this.receiverLabel.setText();
+            this.receiverLabel.setText(reciver);
         }
     }
 }

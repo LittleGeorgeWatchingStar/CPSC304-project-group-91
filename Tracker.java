@@ -11,17 +11,19 @@ public class Tracker {
     }
     public String status = "N/A";
     public String sender = "N/A";
+    public String receiver = "N/A";
 
     public void track(String trackingNum){
         int trackingInt = Integer.parseInt(trackingNum);
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT STATUS, C_NAME FROM  PACKAGES, CLIENT WHERE TRACKING_NO = ? AND CLIENT.C_NO = PACKAGES.CLIENT_NO");
+            PreparedStatement ps = con.prepareStatement("SELECT STATUS, C_NAME, RECEIVER_NAME FROM  PACKAGES, CLIENT WHERE TRACKING_NO = ? AND CLIENT.C_NO = PACKAGES.CLIENT_NO");
 
             ps.setInt(1,trackingInt);
             ResultSet resultSet = ps.executeQuery();
             while(resultSet.next()) {
                 status = resultSet.getString("STATUS");
                 sender = resultSet.getString("C_NAME");
+                receiver = resultSet.getString("RECEIVER_NAME");
             }
             ps.close();
 
