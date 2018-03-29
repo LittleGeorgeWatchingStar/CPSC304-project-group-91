@@ -8,7 +8,7 @@ public class TrackPackage extends JFrame implements ActionListener {
     private JButton btntrack, btnconfirm;
     private JTextField tracknum;
     private JCheckBox arrived;
-    private JLabel num, status, pktstatus;
+    private JLabel num, status, pktstatus, from, sender;
     private String pktnum;
     private Tracker tracker;
 
@@ -49,16 +49,29 @@ public class TrackPackage extends JFrame implements ActionListener {
         pktstatus.setVisible(true);
         pktstatus.setBounds(280, 110, 250, 45);
 
+        from = new JLabel();
+        from.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        from.setForeground(Color.BLACK);
+        from.setText("From");
+        from.setBounds(220, 140, 250, 45);
+
+        sender = new JLabel();
+        sender.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        sender.setForeground(Color.BLUE);
+        sender.setText("Dave");
+        sender.setVisible(true);
+        sender.setBounds(280, 155, 250, 45);
+
         // create check-boxes
         arrived = new JCheckBox("Arrived", false);
         arrived.setBackground(Color.WHITE);
         arrived.setForeground(Color.BLACK);
         arrived.addActionListener(this);
-        arrived.setBounds(210, 150, 250, 45);
+        arrived.setBounds(210, 180, 250, 45);
         arrived.addActionListener(this);
 
         btnconfirm = new JButton("Confirm");
-        btnconfirm.setBounds(280, 190, 80, 30);
+        btnconfirm.setBounds(280, 210, 80, 30);
         btnconfirm.addActionListener(this);
 
 
@@ -73,11 +86,13 @@ public class TrackPackage extends JFrame implements ActionListener {
         panel.add(pktstatus);
         panel.add(arrived);
         panel.add(btnconfirm);
+        panel.add(from);
+        panel.add(sender);
 
 
         // Set properties of the JFrame
         setContentPane(panel);
-        setSize(450, 250);
+        setSize(450, 290);
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Tracking");
