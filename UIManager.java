@@ -15,6 +15,7 @@ public class UIManager extends JFrame implements ActionListener {
     private JTextField tName2, tssn2, tTrackNum;
     private JButton btnAdd, btnDelete, btnTrack;
     private JLabel seperationV, seperationH;
+    private JCheckBox courier, driver;
 
     private Tracker tracker;
     //private Manager manager;
@@ -165,6 +166,20 @@ public class UIManager extends JFrame implements ActionListener {
         receiverLabel.setText("Unknown");
         receiverLabel.setBounds(300, 530, 150, 45);
 
+        courier = new JCheckBox("As Courier", false);
+        courier.setBackground(Color.WHITE);
+        courier.setForeground(Color.BLACK);
+        courier.addActionListener(this);
+        courier.setBounds(30, 250, 100, 45);
+        courier.addActionListener(this);
+
+        driver = new JCheckBox("As Driver", false);
+        driver.setBackground(Color.WHITE);
+        driver.setForeground(Color.BLACK);
+        driver.addActionListener(this);
+        driver.setBounds(140, 250, 100, 45);
+        driver.addActionListener(this);
+
         btnAdd = new JButton("Confirm");
         btnAdd.setForeground(Color.BLACK);
         btnAdd.setBounds(80, 290, 120, 30);
@@ -200,6 +215,7 @@ public class UIManager extends JFrame implements ActionListener {
         panel.add(tName2); panel.add(tssn2); panel.add(tTrackNum);
         panel.add(btnAdd); panel.add(btnDelete); panel.add(btnTrack);
         panel.add(seperationV); panel.add(seperationH);
+        panel.add(driver); panel.add(courier);
 
         // Set properties of the JFrame
         setContentPane(panel);
