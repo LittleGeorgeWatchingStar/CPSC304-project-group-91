@@ -170,7 +170,6 @@ public class UIManager extends JFrame implements ActionListener {
         btnAdd.setBounds(80, 290, 120, 30);
         btnAdd.setEnabled(true);
         btnAdd.addActionListener(this);
-
         btnDelete = new JButton("Confirm");
         btnDelete.setForeground(Color.BLACK);
         btnDelete.setBounds(350, 210, 120, 30);
@@ -181,11 +180,10 @@ public class UIManager extends JFrame implements ActionListener {
         seperationV = new JLabel();
         seperationV.setIcon(img1);
         seperationV.setBounds(260, 50, 2, 275);
-
         ImageIcon img2 = new ImageIcon("hori.jpg");
         seperationH = new JLabel();
         seperationH.setIcon(img2);
-        seperationH.setBounds(50, 330, 400, 2);
+        seperationH.setBounds(50, 330, 420, 2);
 
         // Declare and initialize JPanel
         JPanel panel = new JPanel();
