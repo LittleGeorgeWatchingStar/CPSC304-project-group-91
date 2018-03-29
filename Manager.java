@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.*;
 
 public class Manager {
     private int login;
@@ -158,7 +159,7 @@ public class Manager {
     public void deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
         try{
-            PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO COURIER VALUES (?,?,?)")
+            PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO COURIER VALUES (?,?,?)");
             preparedStatement.setInt(1, Integer.parseInt(CO_SSN));
             preparedStatement.setInt(2, Integer.parseInt(CO_DLNO));
             preparedStatement.setInt(3, Integer.parseInt(DEV_NO));

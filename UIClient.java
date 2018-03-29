@@ -59,9 +59,6 @@ public class UIClient extends JFrame implements ActionListener {
         btnregister.setBounds(328, 170, 80, 30);
         btnregister.addActionListener(this);
 
-        // Initialize JTextField
-
-
 
         login = new JTextField(10);
         login.setBounds(220, 70, 196, 22);
@@ -119,6 +116,7 @@ public class UIClient extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
                                 JOptionPane.INFORMATION_MESSAGE,img1);
 
+                        this.dispose();
                         UIOpenClient = new UIClientService(con);
 
                     }else {
