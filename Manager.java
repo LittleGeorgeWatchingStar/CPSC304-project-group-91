@@ -10,10 +10,25 @@ public class Manager {
     private String driverLicense;
     private Connection con;
 
-    public Manager(String login, String passWord, Connection con){
-        this.login = login;
-        this.passWord = passWord;
+    public Manager(String login, Connection con){
+        this.login = toInt(login);
         this.con = con;
+
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement("SELECT * FROM EMPLOYEE WHERE E_SSN = ?");
+            ps.setInt(1, this.login);
+            ResultSet resultSet = ps.executeQuery();
+            while(resultSet.next()){
+                employeeName = resultSet.getString("E_NAME");
+                position = resultSet.getString("E_POSITION");
+                phoneNum = resultSet.getInt("E_PNO");
+                address = resultSet.getString("E_ADDRESS");
+            }
+            ps.close();
+        }catch (SQLException e){
+            System.exit(-1);
+        }
     }
 
     public void addEmployee( String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
