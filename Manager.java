@@ -1,13 +1,25 @@
 import java.sql.Connection;
 
 public class Manager {
-    private String login;
-    private String passWord;
+    private int login;
+    private int passWord;
     private String ssn;
-    private String phoneNum;
-    private String address;
-    private String employeeName;
-    private String driverLicense;
+    private int phoneNum;
+    public String address;
+    public String employeeName;
+    public String receiverName;
+    public String receiverAddress;
+    public String receiverPhoneNo;
+    public String weight;
+    public String deliveryType;
+    public String status;
+    public String clientNo;
+    public String driverNo;
+    public String courierNo;
+    public String courierDL;
+    public String sendingDate;
+    public String driverLicense;
+    public String position;
     private Connection con;
 
     public Manager(String login, Connection con){
@@ -171,8 +183,28 @@ public class Manager {
     }
 
     public void checkOrder(int orderId){
-        //todo
         //track specific order with orderId
+        try{
+            PreparedStatement ps =con.prepareStatement("SELECT * FROM PACKAGES WHERE TRACKING_NO = ?");
+            ps.setInt(1,login);
+            ResultSet rs = ps.executeQuery();
+            receiverName = rs.getString("RECEIVER_NAME");
+            receiverAddress = rs.getString("RECEIVER_ADDRESS");
+            receiverPhoneNo = rs.getString("RECEIVER_PHONENO");
+            weight = rs.getString("WEIGHT");
+            deliveryType = rs.getString("DELIVERTYPE");
+            status = rs.getString("STATUS");
+            clientNo = rs.getString("CLIENT_NO");
+            driverNo = rs.getString("DRI_SSN");
+            driverLicense = rs.getString("DRI_DLNO");
+            courierNo = rs.getString("CO_SSN");
+            courierDL = rs.getString("CO_DLNO");
+            sendingDate = rs.getString("SENDING_DATE");
+            ps.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            System.exit(-1);
+        }
     }
 
     public void deleteOrder(int orderId){
