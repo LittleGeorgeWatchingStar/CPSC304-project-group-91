@@ -324,6 +324,7 @@ public class UIRegister extends JFrame implements ActionListener {
                 ImageIcon img1 = new ImageIcon("12.jpg");
                 JOptionPane.showMessageDialog(null, "Welcome, you have been registered!", "Success!",
                         JOptionPane.INFORMATION_MESSAGE,img1);
+                this.dispose();
 
             }else{
                 ImageIcon img2 = new ImageIcon("13.jpg");
