@@ -15,7 +15,7 @@ public class UIClientService extends JFrame implements ActionListener {
 
     private JTextField ccdtcard, caddr, ccvv, cphone;
     private JComboBox<String> cmonth, cyear;
-    private JButton cdtCard, delete, btnCard, btnAddr, btnPhone;
+    private JButton cdtCard, delete, btnCard, btnAddr, btnPhone, btnOrder;
     private Connection con;
 
     public UIClientService(Connection con) {
@@ -260,11 +260,11 @@ public class UIClientService extends JFrame implements ActionListener {
         cyear.setBounds(150, 430, 100, 45);
         cyear.addActionListener(this);
 
-        cdtCard = new JButton("Delete Card");
-        cdtCard.setForeground(Color.RED);
-        cdtCard.setBounds(345, 383, 120, 30);
-        cdtCard.setEnabled(true);
-        cdtCard.addActionListener(this);
+//        cdtCard = new JButton("Delete Card");
+//        cdtCard.setForeground(Color.RED);
+//        cdtCard.setBounds(345, 383, 120, 30);
+//        cdtCard.setEnabled(true);
+//        cdtCard.addActionListener(this);
 
         changeAddr = new JLabel();
         changeAddr.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -310,6 +310,12 @@ public class UIClientService extends JFrame implements ActionListener {
         btnPhone.setEnabled(true);
         btnPhone.addActionListener(this);
 
+        btnOrder = new JButton("Delete Order");
+        btnOrder.setForeground(Color.RED);
+        btnOrder.setBounds(345, 350, 120, 30);
+        btnOrder.setEnabled(true);
+        btnOrder.addActionListener(this);
+
         // Declare and initialize JPanel
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
@@ -331,7 +337,7 @@ public class UIClientService extends JFrame implements ActionListener {
         panel.add(year);
         panel.add(cmonth);
         panel.add(cyear);
-        panel.add(cdtCard);
+        //panel.add(cdtCard);
         panel.add(changeAddr);
         panel.add(caddr);
         panel.add(changePhone);
@@ -341,6 +347,7 @@ public class UIClientService extends JFrame implements ActionListener {
         panel.add(btnPhone);
         panel.add(btnAddr);
         panel.add(receiver);
+        panel.add(btnOrder);
 
         // Set properties of the JFrame
         setContentPane(panel);

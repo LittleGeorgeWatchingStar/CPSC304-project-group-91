@@ -4,10 +4,7 @@ import javax.swing.JPanel;
 
 import java.awt.event.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UIbasic extends JFrame implements ActionListener {
     private JButton btnsignin, btnexit;
