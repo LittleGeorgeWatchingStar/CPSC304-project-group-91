@@ -222,37 +222,37 @@ public class UIClientService extends JFrame implements ActionListener {
         packagePanel.add(r5);
 
         packagePanel.setBackground(Color.WHITE);
-        packagePanel.setBounds(20, 110, 320, 230);
+        packagePanel.setBounds(20, 110, 520, 230);
 
         checkBox1 = new JCheckBox("Delete Order", false);
         checkBox1.setBackground(Color.WHITE);
         checkBox1.setForeground(Color.BLACK);
         checkBox1.addActionListener(this);
-        checkBox1.setBounds(350, 130, 250, 45);
+        checkBox1.setBounds(550, 130, 250, 45);
         checkBox1.addActionListener(this);
         checkBox2 = new JCheckBox("Delete Order", false);
         checkBox2.setBackground(Color.WHITE);
         checkBox2.setForeground(Color.BLACK);
         checkBox2.addActionListener(this);
-        checkBox2.setBounds(350, 170, 250, 45);
+        checkBox2.setBounds(550, 170, 250, 45);
         checkBox2.addActionListener(this);
         checkBox3 = new JCheckBox("Delete Order", false);
         checkBox3.setBackground(Color.WHITE);
         checkBox3.setForeground(Color.BLACK);
         checkBox3.addActionListener(this);
-        checkBox3.setBounds(350, 210, 250, 45);
+        checkBox3.setBounds(550, 210, 250, 45);
         checkBox3.addActionListener(this);
         checkBox4 = new JCheckBox("Delete Order", false);
         checkBox4.setBackground(Color.WHITE);
         checkBox4.setForeground(Color.BLACK);
         checkBox4.addActionListener(this);
-        checkBox4.setBounds(350, 250, 250, 45);
+        checkBox4.setBounds(550, 250, 250, 45);
         checkBox4.addActionListener(this);
         checkBox5 = new JCheckBox("Delete Order", false);
         checkBox5.setBackground(Color.WHITE);
         checkBox5.setForeground(Color.BLACK);
         checkBox5.addActionListener(this);
-        checkBox5.setBounds(350, 290, 250, 45);
+        checkBox5.setBounds(550, 290, 250, 45);
         checkBox5.addActionListener(this);
 
 
@@ -367,7 +367,7 @@ public class UIClientService extends JFrame implements ActionListener {
 
         btnOrder = new JButton("Delete Order");
         btnOrder.setForeground(Color.RED);
-        btnOrder.setBounds(345, 350, 120, 30);
+        btnOrder.setBounds(545, 350, 120, 30);
         btnOrder.setEnabled(true);
         btnOrder.addActionListener(this);
 
@@ -406,7 +406,7 @@ public class UIClientService extends JFrame implements ActionListener {
 
         // Set properties of the JFrame
         setContentPane(panel);
-        setSize(560, 700);
+        setSize(740, 700);
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Express Service Client Register");
