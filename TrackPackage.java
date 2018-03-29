@@ -58,7 +58,6 @@ public class TrackPackage extends JFrame implements ActionListener {
         sender = new JLabel();
         sender.setFont(new Font("Times New Roman", Font.PLAIN, 16));
         sender.setForeground(Color.BLUE);
-        sender.setText("Dave");
         sender.setVisible(true);
         sender.setBounds(280, 155, 250, 45);
 
@@ -106,8 +105,11 @@ public class TrackPackage extends JFrame implements ActionListener {
         pktnum = tracknum.getText();
 
         if(e.getSource() == btntrack) {
-            String status = tracker.track(pktnum);
+            tracker.track(pktnum);
+            String status = tracker.status;
+            String sender = tracker.sender;
             pktstatus.setText(status);
+            this.sender.setText(sender);
         }
         if(e.getSource() == btnconfirm) {
             if (arrived.isSelected()) {

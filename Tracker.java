@@ -9,16 +9,19 @@ public class Tracker {
     public Tracker(Connection con){
         this.con = con;
     }
+    public String status = "N/A";
+    public String sender = "N/A";
 
-    public String track(String trackingNum){
+    public void track(String trackingNum){
         int trackingInt = Integer.parseInt(trackingNum);
-        String status = "invalid input";
         try{
-            PreparedStatement ps = con.prepareStatement("SELECT STATUS FROM  PACKAGES WHERE TRACKING_NO = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT STATUS, C_NAME FROM  PACKAGES, CLIENT WHERE TRACKING_NO = ? AND CLIENT.C_NO = PACKAGES.CLIENT_NO");
+
             ps.setInt(1,trackingInt);
             ResultSet resultSet = ps.executeQuery();
             while(resultSet.next()) {
-                status = resultSet.getString(1);
+                status = resultSet.getString("STATUS");
+                sender = resultSet.getString("C_NAME");
             }
             ps.close();
 
@@ -27,7 +30,6 @@ public class Tracker {
             try
             {
                 con.rollback();
-                return "invalid input";
             }
             catch (SQLException ex2)
             {
@@ -35,7 +37,6 @@ public class Tracker {
                 System.exit(-1);
             }
         }
-        return status;
     }
 
 }

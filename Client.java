@@ -72,7 +72,8 @@ public class Client {
 
     private String trackOrder(String orderId){
         Tracker tracker = new Tracker(con);
-        return tracker.track(orderId);
+        tracker.track(orderId);
+        return tracker.status;
     }
 
     private int trackingNUmGenerater(){
