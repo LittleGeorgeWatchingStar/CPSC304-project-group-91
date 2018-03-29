@@ -344,7 +344,7 @@ public class UIClientService extends JFrame implements ActionListener {
 
         // Set properties of the JFrame
         setContentPane(panel);
-        setSize(570, 700);
+        setSize(560, 700);
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Express Service Client Register");

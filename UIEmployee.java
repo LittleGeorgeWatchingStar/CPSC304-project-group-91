@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.time.Month;
 import java.time.Year;
 import java.util.Calendar;
-public class UIEmployee extends JFrame implements ActionListener  {
+public class UIEmployee extends JFrame implements ActionListener{
     private JLabel hello, name;
     private JLabel viewOrder, status, totalWeight, weight, typeOfVehicle, vehicle;
     private JLabel addPackageHere, pktorderNumber, pktreceiverName, pktaddr, pktweight, pktdeliverType, pktstatus;
@@ -18,8 +18,11 @@ public class UIEmployee extends JFrame implements ActionListener  {
     private JButton addPackage, checkWeight, comfirm;
     private JTextField torderNumber, treceiverName, taddr, tweight, tdeliverType, tstatus;
     private JLabel seperationV;
+    private Connection con;
 
-    public UIEmployee() {
+    public UIEmployee(Connection con) {
+        this.con = con;
+
         hello = new JLabel();
         hello.setFont(new Font("Times New Roman", Font.BOLD, 15));
         hello.setForeground(Color.BLACK);
@@ -291,7 +294,7 @@ public class UIEmployee extends JFrame implements ActionListener  {
         ImageIcon img = new ImageIcon("ver.jpg");
         seperationV = new JLabel();
         seperationV.setIcon(img);
-        seperationV.setBounds(480, 50, 2, 500);
+        seperationV.setBounds(480, 50, 2, 520);
 
         typeOfVehicle = new JLabel();
         typeOfVehicle.setFont(new Font("Times New Roman", Font.PLAIN, 12));
@@ -415,9 +418,6 @@ public class UIEmployee extends JFrame implements ActionListener  {
         panel.add(comfirm);
         panel.add(addPackage);
 
-
-
-
         // Set properties of the JFrame
         setContentPane(panel);
         setSize(850, 700);
@@ -431,6 +431,7 @@ public class UIEmployee extends JFrame implements ActionListener  {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
 
     }
 }
