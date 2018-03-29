@@ -12,6 +12,7 @@ public class UIbasic extends JFrame implements ActionListener {
     private JPasswordField password;
     private Connection con;
     private UIEmployee employeePage;
+    private UIManager UImanager;
 
 
     public UIbasic(Connection con) {
