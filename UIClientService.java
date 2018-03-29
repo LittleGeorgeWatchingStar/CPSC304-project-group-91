@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
+import java.util.Calendar;
 
 public class UIClientService extends JFrame implements ActionListener {
     private JLabel hello, name;
@@ -17,9 +18,29 @@ public class UIClientService extends JFrame implements ActionListener {
     private JComboBox<String> cmonth, cyear;
     private JButton cdtCard, delete, btnCard, btnAddr, btnPhone;
     private Connection con;
+    private String o1t = "0000";
+    private String o2t = "0000";
+    private String o3t = "0000";
+    private String o4t = "0000";
+    private String o5t = "0000";
 
-    public UIClientService(Connection con) {
+    private String s1t = "N/A";
+    private String s2t = "N/A";
+    private String s3t = "N/A";
+    private String s4t = "N/A";
+    private String s5t = "N/A";
+
+    private String r1t = "N/A";
+    private String r2t = "N/A";
+    private String r3t = "N/A";
+    private String r4t = "N/A";
+    private String r5t = "N/A";
+    private Client client;
+
+    public UIClientService(Client client, Connection con) {
         this.con = con;
+        this.client = client;
+        client.viewOrders();
         hello = new JLabel();
         hello.setFont(new Font("Times New Roman", Font.BOLD, 15));
         hello.setForeground(Color.BLACK);
@@ -31,7 +52,7 @@ public class UIClientService extends JFrame implements ActionListener {
         name.setForeground(Color.BLACK);
         //TODO
         // name get from database
-        name.setText("Joe");
+        name.setText(client.clientName);
         name.setBounds(60, 20, 150, 45);
 
         viewOrder = new JLabel();
@@ -51,6 +72,40 @@ public class UIClientService extends JFrame implements ActionListener {
         receiver.setForeground(Color.BLACK);
         receiver.setText("Receiver");
         receiver.setBounds(260, 60, 250, 45);
+
+
+
+        if(client.statusArray[0] != null){
+            o1t = client.orderNums[0];
+            System.out.println(client.orderNums[0]);
+            s1t = client.statusArray[0];
+            System.out.println(s1t);
+            r1t = client.receiverArray[0];
+            System.out.println(r1t);
+            if(client.statusArray[1] != null) {
+                o2t = client.orderNums[1];
+                s2t = client.statusArray[1];
+                r2t = client.receiverArray[1];
+                System.out.println(s2t);
+                if(client.statusArray[2] != null) {
+                    o3t = client.orderNums[2];
+                    s3t = client.statusArray[2];
+                    r3t = client.receiverArray[2];
+                    System.out.println(r3t);
+                    if(client.statusArray[3] != null) {
+                        o4t = client.orderNums[3];
+                        s4t = client.statusArray[3];
+                        r4t = client.receiverArray[3];
+                        if(client.statusArray[4] != null) {
+                            o5t = client.orderNums[4];
+                            s5t = client.statusArray[4];
+                            r5t = client.receiverArray[4];
+                        }
+                    }
+                }
+
+            }
+        }
 
         l1 = new JLabel();
         l1.setFont(new Font("Magneto", Font.BOLD, 12));
@@ -76,66 +131,66 @@ public class UIClientService extends JFrame implements ActionListener {
         o1 = new JLabel();
         o1.setFont(new Font("Magneto", Font.BOLD, 12));
         o1.setForeground(Color.BLACK);
-        o1.setText("0000");
+        o1.setText(o1t);
         o2 = new JLabel();
         o2.setFont(new Font("Magneto", Font.BOLD, 12));
         o2.setForeground(Color.BLACK);
-        o2.setText("0000");
+        o2.setText(o2t);
         o3 = new JLabel();
         o3.setFont(new Font("Magneto", Font.BOLD, 12));
         o3.setForeground(Color.BLACK);
-        o3.setText("0000");
+        o3.setText(o3t);
         o4 = new JLabel();
         o4.setFont(new Font("Magneto", Font.BOLD, 12));
         o4.setForeground(Color.BLACK);
-        o4.setText("0000");
+        o4.setText(o4t);
         o5 = new JLabel();
         o5.setFont(new Font("Magneto", Font.BOLD, 12));
         o5.setForeground(Color.BLACK);
-        o5.setText("0000");
+        o5.setText(o5t);
 
         s1 = new JLabel();
         s1.setFont(new Font("Magneto", Font.BOLD, 12));
         s1.setForeground(Color.BLACK);
-        s1.setText("pending");
+        s1.setText(s1t);
         s2 = new JLabel();
         s2.setFont(new Font("Magneto", Font.BOLD, 12));
         s2.setForeground(Color.BLACK);
-        s2.setText("pending");
+        s2.setText(s2t);
         s3 = new JLabel();
         s3.setFont(new Font("Magneto", Font.BOLD, 12));
         s3.setForeground(Color.BLACK);
-        s3.setText("pending");
+        s3.setText(s3t);
         s4 = new JLabel();
         s4.setFont(new Font("Magneto", Font.BOLD, 12));
         s4.setForeground(Color.BLACK);
-        s4.setText("pending");
+        s4.setText(s4t);
         s5 = new JLabel();
         s5.setFont(new Font("Magneto", Font.BOLD, 12));
         s5.setForeground(Color.BLACK);
-        s5.setText("pending");
+        s5.setText(s5t);
 
         r1 = new JLabel();
         r1.setFont(new Font("Magneto", Font.BOLD, 12));
         r1.setForeground(Color.BLACK);
-        r1.setText("pending");
+        r1.setText(r1t);
         r2 = new JLabel();
         r2.setFont(new Font("Magneto", Font.BOLD, 12));
         r2.setForeground(Color.BLACK);
-        r2.setText("pending");
+        r2.setText(r2t);
         r3 = new JLabel();
         r3.setFont(new Font("Magneto", Font.BOLD, 12));
         r3.setForeground(Color.BLACK);
-        r3.setText("pending");
+        r3.setText(r3t);
         r4 = new JLabel();
         r4.setFont(new Font("Magneto", Font.BOLD, 12));
         r4.setForeground(Color.BLACK);
-        r4.setText("pending");
+        r4.setText(r4t);
         r5 = new JLabel();
         r5.setFont(new Font("Magneto", Font.BOLD, 12));
         r5.setForeground(Color.BLACK);
-        r5.setText("pending");
-
+        r5.setText(r5t);
+        repaint();
 
         JPanel packagePanel = new JPanel();
         packagePanel.setBorder(BorderFactory
@@ -355,7 +410,121 @@ public class UIClientService extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(checkBox1.isSelected()){
+            if(!o1t.equals("0000")) {
+                client.deleteOrder(o1t);
+                repaint();
+            }
+        }
+        if(checkBox2.isSelected()){
+            if(!o2t.equals("0000")) {
+                client.deleteOrder(o2t);
+                repaint();
+            }
+        }
+        if(checkBox3.isSelected()){
+            if(!o3t.equals("0000")) {
+                client.deleteOrder(o3t);
+                repaint();
+            }
+        }
+        if(checkBox4.isSelected()){
+            if(!o4t.equals("0000")) {
+                client.deleteOrder(o4t);
+                repaint();
+            }
+        }
+        if(checkBox5.isSelected()){
+            if(!o5t.equals("0000")) {
+                client.deleteOrder(o5t);
+                repaint();
+            }
+        }
+        int monthSelected = 0;
+        int yearSelected = 0;
 
+        if (e.getSource() == cmonth) {
+            if (cmonth.getSelectedIndex() == 0) {
+                monthSelected = 1;
+            } else if (cmonth.getSelectedIndex() == 1) {
+                monthSelected = 2;
+            } else if (cmonth.getSelectedIndex() == 2) {
+                monthSelected = 3;
+            } else if (cmonth.getSelectedIndex() == 3) {
+                monthSelected = 4;
+            } else if (cmonth.getSelectedIndex() == 4) {
+                monthSelected = 5;
+            } else if (cmonth.getSelectedIndex() == 5) {
+                monthSelected = 6;
+            } else if (cmonth.getSelectedIndex() == 6) {
+                monthSelected = 7;
+            } else if (cmonth.getSelectedIndex() == 7) {
+                monthSelected = 8;
+            } else if (cmonth.getSelectedIndex() == 8) {
+                monthSelected = 9;
+            } else if (cmonth.getSelectedIndex() == 9) {
+                monthSelected = 10;
+            } else if (cmonth.getSelectedIndex() == 10) {
+                monthSelected = 11;
+            } else if (cmonth.getSelectedIndex() == 11) {
+                monthSelected = 12;
+            }
+        }
+
+        if (e.getSource() == cyear) {
+            if (cyear.getSelectedIndex() == 0) {
+                yearSelected = 2018;
+            } else if (cyear.getSelectedIndex() == 1) {
+                yearSelected = 2019;
+            } else if (cyear.getSelectedIndex() == 2) {
+                yearSelected = 2021;
+            } else if (cyear.getSelectedIndex() == 3) {
+                yearSelected = 2022;
+            } else if (cyear.getSelectedIndex() == 4) {
+                yearSelected = 2023;
+            } else if (cyear.getSelectedIndex() == 5) {
+                yearSelected = 2024;
+            } else if (cyear.getSelectedIndex() == 6) {
+                yearSelected = 2025;
+            } else if (cyear.getSelectedIndex() == 7) {
+                yearSelected = 2026;
+            } else if (cyear.getSelectedIndex() == 8) {
+                yearSelected = 2027;
+            } else if (cyear.getSelectedIndex() == 9) {
+                yearSelected = 2028;
+            }
+        }
+
+        if(e.getSource() == changeCard){
+            String newCard = ccdtcard.getText();
+            String newCvv = ccvv.getText();
+            if(!newCard.isEmpty() && !newCvv.isEmpty()){
+                Calendar cal = Calendar.getInstance();
+                int yearNow = cal.get(Calendar.YEAR);
+                int monthNow = cal.get(Calendar.MONTH);
+                if(yearSelected < yearNow || (yearSelected == yearNow && monthSelected <= monthNow)){
+                    ImageIcon img2 = new ImageIcon("13.jpg");
+                    JOptionPane.showMessageDialog(null, "Credit card invalid expiration date",
+                            "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+                    return;
+                }
+                client.changeCreditCard(newCard,newCvv);
+            }
+        }
+        if(e.getSource() == btnAddr){
+            if(!caddr.getText().isEmpty()) {
+                client.changeAddress(caddr.getText());
+            }
+        }
+        if(e.getSource() == btnPhone){
+            if(!cphone.getText().isEmpty()) {
+                client.changeAddress(cphone.getText());
+            }
+        }
+        if(e.getSource() == delete){
+            client.deleteAccount();
+            System.exit(0);
+        }
 
     }
 }
