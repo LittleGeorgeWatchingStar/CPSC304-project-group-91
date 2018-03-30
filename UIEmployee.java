@@ -4,39 +4,43 @@ import java.awt.*;
 
 import java.sql.Connection;
 import java.awt.event.*;
-import java.time.Month;
-import java.time.Year;
-import java.util.Calendar;
+
 public class UIEmployee extends JFrame implements ActionListener{
     private JLabel hello, name;
     private JLabel viewOrder, status, totalWeight, weight, typeOfVehicle, vehicle;
-    private JLabel addPackageHere, pktorderNumber, pktreceiverName, pktaddr, pktweight, pktdeliverType, pktstatus;
+    private JLabel addPackageHere, pktorderNumber, pktreceiverName, pktaddr, pktweight, pktdeliverType, pktstatus, pktPhone;
     private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10;
     private JLabel o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
     private JLabel s1, s2, s3, s4, s5, s6, s7, s8, s9, s10;
     private JCheckBox checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9, checkBox10;
     private JButton addPackage, checkWeight, comfirm;
-    private JTextField torderNumber, treceiverName, taddr, tweight, tdeliverType, tstatus;
+    private JTextField tClientNumber, treceiverName, taddr, tweight, tdeliverType, tstatus, tPhone;
     private JLabel seperationV;
     private Connection con;
+    private Courier courier;
 
-    public UIEmployee(Connection con) {
+    private String o1t = "0000";
+    private String o2t = "0000";
+    private String o3t = "0000";
+    private String o4t = "0000";
+    private String o5t = "0000";
+
+    private String s1t = "N/A";
+    private String s2t = "N/A";
+    private String s3t = "N/A";
+    private String s4t = "N/A";
+    private String s5t = "N/A";
+
+    private String r1t = "N/A";
+    private String r2t = "N/A";
+    private String r3t = "N/A";
+    private String r4t = "N/A";
+    private String r5t = "N/A";
+
+
+    public UIEmployee(Connection con, String pos, Courier courier) {
         this.con = con;
-
-        hello = new JLabel();
-        hello.setFont(new Font("Times New Roman", Font.BOLD, 15));
-        hello.setForeground(Color.BLACK);
-        hello.setText("Hello");
-        hello.setBounds(20, 20, 50, 45);
-
-        name = new JLabel();
-        name.setFont(new Font("Times New Roman", Font.BOLD, 15));
-        name.setForeground(Color.BLACK);
-        //TODO
-        // name get from database
-        name.setText("Joe");
-        name.setBounds(60, 20, 150, 45);
-
+        this.courier = courier;
 
         viewOrder = new JLabel();
         viewOrder.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -50,129 +54,82 @@ public class UIEmployee extends JFrame implements ActionListener{
         status.setText("Status");
         status.setBounds(215, 60, 50, 45);
 
-        l1 = new JLabel();
-        l1.setFont(new Font("Magneto", Font.BOLD, 12));
-        l1.setForeground(Color.BLACK);
-        l1.setText("1");
-        l2 = new JLabel();
-        l2.setFont(new Font("Magneto", Font.BOLD, 12));
-        l2.setForeground(Color.BLACK);
-        l2.setText("2");
-        l3 = new JLabel();
-        l3.setFont(new Font("Magneto", Font.BOLD, 12));
-        l3.setForeground(Color.BLACK);
-        l3.setText("3");
-        l4 = new JLabel();
-        l4.setFont(new Font("Magneto", Font.BOLD, 12));
-        l4.setForeground(Color.BLACK);
-        l4.setText("4");
-        l5 = new JLabel();
-        l5.setFont(new Font("Magneto", Font.BOLD, 12));
-        l5.setForeground(Color.BLACK);
-        l5.setText("5");
-        l6 = new JLabel();
-        l6.setFont(new Font("Magneto", Font.BOLD, 12));
-        l6.setForeground(Color.BLACK);
-        l6.setText("6");
-        l7 = new JLabel();
-        l7.setFont(new Font("Magneto", Font.BOLD, 12));
-        l7.setForeground(Color.BLACK);
-        l7.setText("7");
-        l8 = new JLabel();
-        l8.setFont(new Font("Magneto", Font.BOLD, 12));
-        l8.setForeground(Color.BLACK);
-        l8.setText("8");
-        l9 = new JLabel();
-        l9.setFont(new Font("Magneto", Font.BOLD, 12));
-        l9.setForeground(Color.BLACK);
-        l9.setText("9");
-        l10 = new JLabel();
-        l10.setFont(new Font("Magneto", Font.BOLD, 12));
-        l10.setForeground(Color.BLACK);
-        l10.setText("10");
+        if(pos == "Courier"){
+            if( courier.WeightArray!= null){
+                o1t = courier.orderNums[0];
+                System.out.println(courier.orderNums[0]);
+                s1t = courier.statusArray[0];
+                System.out.println(s1t);
+                r1t = courier.receiverArray[0];
+                System.out.println(r1t);
+                if(courier.statusArray[1] != null) {
+                    o2t = courier.orderNums[1];
+                    s2t = courier.statusArray[1];
+                    r2t = courier.receiverArray[1];
+                    System.out.println(s2t);
+                    if(courier.statusArray[2] != null) {
+                        o3t = courier.orderNums[2];
+                        s3t = courier.statusArray[2];
+                        r3t = courier.receiverArray[2];
+                        System.out.println(r3t);
+                        if(courier.statusArray[3] != null) {
+                            o4t = courier.orderNums[3];
+                            s4t = courier.statusArray[3];
+                            r4t = courier.receiverArray[3];
+                            if(courier.statusArray[4] != null) {
+                                o5t = courier.orderNums[4];
+                                s5t = courier.statusArray[4];
+                                r5t = courier.receiverArray[4];
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
 
 
         o1 = new JLabel();
         o1.setFont(new Font("Magneto", Font.BOLD, 12));
         o1.setForeground(Color.BLACK);
-        o1.setText("0000");
+        o1.setText(o1t);
         o2 = new JLabel();
         o2.setFont(new Font("Magneto", Font.BOLD, 12));
         o2.setForeground(Color.BLACK);
-        o2.setText("0000");
+        o2.setText(o2t);
         o3 = new JLabel();
         o3.setFont(new Font("Magneto", Font.BOLD, 12));
         o3.setForeground(Color.BLACK);
-        o3.setText("0000");
+        o3.setText(o3t);
         o4 = new JLabel();
         o4.setFont(new Font("Magneto", Font.BOLD, 12));
         o4.setForeground(Color.BLACK);
-        o4.setText("0000");
+        o4.setText(o4t);
         o5 = new JLabel();
         o5.setFont(new Font("Magneto", Font.BOLD, 12));
         o5.setForeground(Color.BLACK);
-        o5.setText("0000");
-        o6 = new JLabel();
-        o6.setFont(new Font("Magneto", Font.BOLD, 12));
-        o6.setForeground(Color.BLACK);
-        o6.setText("0000");
-        o7 = new JLabel();
-        o7.setFont(new Font("Magneto", Font.BOLD, 12));
-        o7.setForeground(Color.BLACK);
-        o7.setText("0000");
-        o8 = new JLabel();
-        o8.setFont(new Font("Magneto", Font.BOLD, 12));
-        o8.setForeground(Color.BLACK);
-        o8.setText("0000");
-        o9 = new JLabel();
-        o9.setFont(new Font("Magneto", Font.BOLD, 12));
-        o9.setForeground(Color.BLACK);
-        o9.setText("0000");
-        o10 = new JLabel();
-        o10.setFont(new Font("Magneto", Font.BOLD, 12));
-        o10.setForeground(Color.BLACK);
-        o10.setText("0000");
+        o5.setText(o5t);
 
         s1 = new JLabel();
         s1.setFont(new Font("Magneto", Font.BOLD, 12));
         s1.setForeground(Color.BLACK);
-        s1.setText("pending");
+        s1.setText(s1t);
         s2 = new JLabel();
         s2.setFont(new Font("Magneto", Font.BOLD, 12));
         s2.setForeground(Color.BLACK);
-        s2.setText("pending");
+        s2.setText(s2t);
         s3 = new JLabel();
         s3.setFont(new Font("Magneto", Font.BOLD, 12));
         s3.setForeground(Color.BLACK);
-        s3.setText("pending");
+        s3.setText(s3t);
         s4 = new JLabel();
         s4.setFont(new Font("Magneto", Font.BOLD, 12));
         s4.setForeground(Color.BLACK);
-        s4.setText("pending");
+        s4.setText(s4t);
         s5 = new JLabel();
         s5.setFont(new Font("Magneto", Font.BOLD, 12));
         s5.setForeground(Color.BLACK);
-        s5.setText("pending");
-        s6 = new JLabel();
-        s6.setFont(new Font("Magneto", Font.BOLD, 12));
-        s6.setForeground(Color.BLACK);
-        s6.setText("pending");
-        s7 = new JLabel();
-        s7.setFont(new Font("Magneto", Font.BOLD, 12));
-        s7.setForeground(Color.BLACK);
-        s7.setText("pending");
-        s8 = new JLabel();
-        s8.setFont(new Font("Magneto", Font.BOLD, 12));
-        s8.setForeground(Color.BLACK);
-        s8.setText("pending");
-        s9 = new JLabel();
-        s9.setFont(new Font("Magneto", Font.BOLD, 12));
-        s9.setForeground(Color.BLACK);
-        s9.setText("pending");
-        s10 = new JLabel();
-        s10.setFont(new Font("Magneto", Font.BOLD, 12));
-        s10.setForeground(Color.BLACK);
-        s10.setText("pending");
+        s5.setText(s5t);
 
 
         JPanel packagePanel = new JPanel();
@@ -194,21 +151,7 @@ public class UIEmployee extends JFrame implements ActionListener{
         packagePanel.add(l5);
         packagePanel.add(o5);
         packagePanel.add(s5);
-        packagePanel.add(l6);
-        packagePanel.add(o6);
-        packagePanel.add(s6);
-        packagePanel.add(l7);
-        packagePanel.add(o7);
-        packagePanel.add(s7);
-        packagePanel.add(l8);
-        packagePanel.add(o8);
-        packagePanel.add(s8);
-        packagePanel.add(l9);
-        packagePanel.add(o9);
-        packagePanel.add(s9);
-        packagePanel.add(l10);
-        packagePanel.add(o10);
-        packagePanel.add(s10);
+
 
         packagePanel.setBackground(Color.WHITE);
         packagePanel.setBounds(20, 110, 290, 450);
@@ -316,11 +259,11 @@ public class UIEmployee extends JFrame implements ActionListener{
         pktorderNumber = new JLabel();
         pktorderNumber.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         pktorderNumber.setForeground(Color.BLACK);
-        pktorderNumber.setText("Order Number");
+        pktorderNumber.setText("Client Number");
         pktorderNumber.setBounds(495, 150, 250, 45);
-        torderNumber = new JTextField(10);
-        torderNumber.setBounds(495, 180, 250, 22);
-        torderNumber.setHorizontalAlignment(JLabel.CENTER);
+        tClientNumber = new JTextField(10);
+        tClientNumber.setBounds(495, 180, 250, 22);
+        tClientNumber.setHorizontalAlignment(JLabel.CENTER);
 
         pktreceiverName = new JLabel();
         pktreceiverName.setFont(new Font("Times New Roman", Font.PLAIN, 12));
@@ -357,6 +300,15 @@ public class UIEmployee extends JFrame implements ActionListener{
         tdeliverType = new JTextField(10);
         tdeliverType.setBounds(495, 500, 250, 22);
         tdeliverType.setHorizontalAlignment(JLabel.CENTER);
+
+        pktPhone = new JLabel();
+        pktPhone.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+        pktPhone.setForeground(Color.BLACK);
+        pktPhone.setText("Deliver Type");
+        pktPhone.setBounds(495, 200, 250, 45);
+        tPhone = new JTextField(10);
+        tPhone.setBounds(495, 240, 250, 22);
+        tPhone.setHorizontalAlignment(JLabel.CENTER);
 
         pktstatus = new JLabel();
         pktstatus.setFont(new Font("Times New Roman", Font.PLAIN, 12));
@@ -404,7 +356,7 @@ public class UIEmployee extends JFrame implements ActionListener{
         panel.add(vehicle);
         panel.add(addPackageHere);
         panel.add(pktorderNumber);
-        panel.add(torderNumber);
+        panel.add(tClientNumber);
         panel.add(pktreceiverName);
         panel.add(treceiverName);
         panel.add(pktaddr);
@@ -417,6 +369,8 @@ public class UIEmployee extends JFrame implements ActionListener{
         panel.add(tstatus);
         panel.add(comfirm);
         panel.add(addPackage);
+        panel.add(pktPhone);
+        panel.add(tPhone);
 
         // Set properties of the JFrame
         setContentPane(panel);
@@ -431,7 +385,49 @@ public class UIEmployee extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == comfirm) {
+            if (checkBox1.isSelected()) {
+                if (!o1t.equals("0000")) {
+                    courier.updatePackage(Integer.parseInt(o1t));
+                    repaint();
+                }
+            }
+            if (checkBox2.isSelected()) {
+                if (!o2t.equals("0000")) {
+                    courier.updatePackage(Integer.parseInt(o2t));
+                    repaint();
+                }
+            }
+            if (checkBox3.isSelected()) {
+                if (!o3t.equals("0000")) {
+                    courier.updatePackage(Integer.parseInt(o3t));
+                    repaint();
+                }
+            }
+            if (checkBox4.isSelected()) {
+                if (!o4t.equals("0000")) {
+                    courier.updatePackage(Integer.parseInt(o4t));
+                    repaint();
+                }
+            }
+            if (checkBox5.isSelected()) {
+                if (!o5t.equals("0000")) {
+                    courier.updatePackage(Integer.parseInt(o5t));
+                    repaint();
+                }
+            }
+        }
 
+        if(e.getSource() == addPackage){
+            courier.placeOrder(Integer.parseInt(tClientNumber.getText()),tdeliverType.getText(),treceiverName.getText()
+            ,taddr.getText(),tPhone.getText(),weight.getText(),tdeliverType.getText());
+        }
+
+        if(e.getSource() == checkWeight){
+            int tW = courier.totalWeight();
+            String stw = tweight.toString();
+            totalWeight.setText(stw);
+        }
 
     }
 }
