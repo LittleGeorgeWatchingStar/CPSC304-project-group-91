@@ -23,8 +23,8 @@ public class Manager {
     public String position;
     private Connection con;
 
-    public Manager(String login, Connection con){
-        this.login = toInt(login);
+    public Manager(Connection con){
+        //this.login = toInt(login);
         this.con = con;
 
         PreparedStatement ps;
@@ -44,7 +44,7 @@ public class Manager {
         }
     }
 
-    public void addEmployee( String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
+    public boolean addEmployee( String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
         //todo
         try {
             int count = 1;
@@ -67,6 +67,8 @@ public class Manager {
                 preparedStatement.close();
             }
 
+            return true;
+
         } catch (SQLException ex) {
             System.out.println("Message: " + ex.getMessage());
             try {
@@ -76,11 +78,12 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
     }
 
-    public void addDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
-            //todo
+    public boolean addDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
         try{
                         PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO DRIVER VALUES (?,?,?)");
                         preparedStatement.setInt(1, Integer.parseInt(DR_SSN));
@@ -89,6 +92,8 @@ public class Manager {
 
                         preparedStatement.executeUpdate();
                         preparedStatement.close();
+
+                        return true;
                     }
                 catch(SQLException ex)
                 {
@@ -103,13 +108,13 @@ public class Manager {
                                 System.out.println("Message: " + ex2.getMessage());
                         System.exit(-1);
                     }
+
+                    return false;
                 }
 
 
         }
-    public void deleteDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
-        //todo
-
+    public boolean deleteDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
         try{
             PreparedStatement preparedStatement= con.prepareStatement ("DELETE FROM DRIVER WHERE DRI_SSN = ?, DRI_DLNO = ?, DR_OFF_NO = ?");
             preparedStatement.setInt(1, Integer.parseInt(DR_SSN));
@@ -118,6 +123,8 @@ public class Manager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
         }
         catch(SQLException ex)
         {
@@ -132,11 +139,14 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
+
 
     }
 
-      public void addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+      public boolean addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
 
         try{
@@ -147,6 +157,8 @@ public class Manager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
         }
         catch(SQLException ex)
         {
@@ -161,11 +173,13 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
 
     }
     
-    public void deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+    public boolean deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
         try{
             PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO COURIER VALUES (?,?,?)");
@@ -175,6 +189,8 @@ public class Manager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
         }
         catch(SQLException ex)
         {
@@ -189,6 +205,8 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
     }
 

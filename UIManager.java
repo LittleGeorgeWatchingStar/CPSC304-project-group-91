@@ -251,7 +251,8 @@ public class UIManager extends JFrame implements ActionListener {
 
         addSSN = tssn.getText();
         //System.out.println(addSSN);
-        addAddress = taddress.getText().toString();
+        addAddress = taddress.getText();
+
         addPhone = tphone.getText().toString();
         //System.out.println(addPhone);
         addPwd = tpwd.getText().toString();
