@@ -93,17 +93,26 @@ public class UIbasic extends JFrame implements ActionListener {
         if (e.getSource() == btnsignin) {
             // 2017 Quan Zhang, David Chen all rights reserved
             try{
-                PreparedStatement ps = con.prepareStatement("SELECT E_PASSWORD FROM EMPLOYEE WHERE E_SSN = ?");
+                PreparedStatement ps = con.prepareStatement("SELECT E_PASSWORD, E_POSITION, E_NAME FROM EMPLOYEE WHERE E_SSN = ?");
                 ps.setInt(1, Integer.parseInt(employeename));
                 ResultSet rs = ps.executeQuery();
+
+
 
                 while(rs.next()){
                     if(rs.getInt(1) == Integer.parseInt(employeepwd)){
                         ImageIcon img1 = new ImageIcon("12.jpg");
                         JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
                                 JOptionPane.INFORMATION_MESSAGE,img1);
-
-                        employeePage = new UIEmployee(con);
+                        String employeeType = rs.getString(2);
+                        if (employeeType == "Manager") {
+                            UImanager = new UIManager(con);
+                            this.dispose();
+                        } else {
+                            Courier courier = new Courier(employeename,employeepwd,con);
+                            employeePage = new UIEmployee(con, employeeType,courier);
+                            this.dispose();
+                        }
 
                     }else {
                         ImageIcon img2 = new ImageIcon("13.jpg");

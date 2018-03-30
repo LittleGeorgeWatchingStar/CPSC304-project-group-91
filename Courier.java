@@ -51,29 +51,29 @@ public class Courier {
         }
     }
 
-    public void viewPrioritizedPackages(){
-        try{
-            PreparedStatement ps =con.prepareStatement("SELECT TRACKING_NO, RECEIVER_NAME, STATUS, RECEIVER_PHONENO, WEIGHT FROM PACKAGES WHERE CO_SSN =? AND DELIVERTYPE = 'EXPRESS'");
-            ps.setInt(1,Integer.parseInt(ssn));
-            ResultSet rs = ps.executeQuery();
-            int i  = 0;
-            while(rs.next()&&i<5){
-                orderNums[i] = rs.getString("TRACKING_NO");
-                receiverArray[i] = rs.getString("RECEIVER_NAME");
-                statusArray[i] = rs.getString("STATUS");
-                WeightArray[i] = rs.getLong("WEIGHT");
-                i++;
-            }
-            ps.close();
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-
-    }
+//    public void viewPrioritizedPackages(){
+//        try{
+//            PreparedStatement ps =con.prepareStatement("SELECT TRACKING_NO, RECEIVER_NAME, STATUS, RECEIVER_PHONENO, WEIGHT FROM PACKAGES WHERE CO_SSN =? AND DELIVERTYPE = 'EXPRESS'");
+//            ps.setInt(1,Integer.parseInt(ssn));
+//            ResultSet rs = ps.executeQuery();
+//            int i  = 0;
+//            while(rs.next()&&i<5){
+//                orderNums[i] = rs.getString("TRACKING_NO");
+//                receiverArray[i] = rs.getString("RECEIVER_NAME");
+//                statusArray[i] = rs.getString("STATUS");
+//                WeightArray[i] = rs.getLong("WEIGHT");
+//                i++;
+//            }
+//            ps.close();
+//        }catch (SQLException e){
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
 
     public void updatePackage(int orderId){
         try{
-            PreparedStatement ps =con.prepareStatement("UPDATE PACKAGES SET STATUS='deliver_by_courier' WHERE TRACKING_NO = ?");
+            PreparedStatement ps =con.prepareStatement("UPDATE PACKAGES SET STATUS='delivered' WHERE TRACKING_NO = ?");
             ps.setInt(1,orderId);
             ps.execute();
             ps.close();
@@ -97,23 +97,6 @@ public class Courier {
         return totalWeight();
     }
 
-    public void getReceiverInfo(int orderId){
-        try{
-            PreparedStatement ps =con.prepareStatement("SELECT RECEIVER_NAME, RECEIVER_PHONENO, RECEIVER_ADDRESS FROM PACKAGES WHERE TRACKING_NO =?");
-            ps.setInt(1,orderId);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                String receiverName = rs.getString(1);
-                Long receiverPhone = rs.getLong(2);
-                String receiverAddress = rs.getString(3);
-
-            }
-            ps.close();
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-
-    }
     public String placeOrder(int clogin,String type,  String receiverName, String recieverAddress, String recieverPhoneNo,
                              String weight, String DeliverType){
         float weightNum = Float.parseFloat(weight);
@@ -127,7 +110,7 @@ public class Courier {
             ps.setInt(4,rPhone);
             ps.setFloat(5,weightNum);
             ps.setString(6,type);
-            ps.setString(8,"in_station");
+            ps.setString(8,"deliver_by_courier");
             ps.setInt(7, clogin);
             ps.setString(9,null);
             ps.setString(10,null);
