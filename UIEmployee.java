@@ -9,9 +9,9 @@ public class UIEmployee extends JFrame implements ActionListener{
     private JLabel hello, name;
     private JLabel viewOrder, status, totalWeight, weight, typeOfVehicle, vehicle;
     private JLabel addPackageHere, pktorderNumber, pktreceiverName, pktaddr, pktweight, pktdeliverType, pktstatus, pktPhone;
-    private JLabel l1, l2, l3, l4, l5, l6, l7, l8, l9, l10;
-    private JLabel o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
-    private JLabel s1, s2, s3, s4, s5, s6, s7, s8, s9, s10;
+
+    private JLabel o1, o2, o3, o4, o5;
+    private JLabel s1, s2, s3, s4, s5;
     private JCheckBox checkBox1, checkBox2, checkBox3, checkBox4, checkBox5, checkBox6, checkBox7, checkBox8, checkBox9, checkBox10;
     private JButton addPackage, checkWeight, comfirm;
     private JTextField tClientNumber, treceiverName, taddr, tweight, tdeliverType, tstatus, tPhone;
@@ -136,20 +136,20 @@ public class UIEmployee extends JFrame implements ActionListener{
         JPanel packagePanel = new JPanel();
         packagePanel.setBorder(BorderFactory
                 .createTitledBorder("Current Packages"));
-        packagePanel.setLayout(new GridLayout(10, 3, 10, 5));
-        packagePanel.add(l1);
+        packagePanel.setLayout(new GridLayout(5, 2, 10, 5));
+
         packagePanel.add(o1);
         packagePanel.add(s1);
-        packagePanel.add(l2);
+
         packagePanel.add(o2);
         packagePanel.add(s2);
-        packagePanel.add(l3);
+
         packagePanel.add(o3);
         packagePanel.add(s3);
-        packagePanel.add(l4);
+
         packagePanel.add(o4);
         packagePanel.add(s4);
-        packagePanel.add(l5);
+
         packagePanel.add(o5);
         packagePanel.add(s5);
 
@@ -305,7 +305,7 @@ public class UIEmployee extends JFrame implements ActionListener{
         pktPhone = new JLabel();
         pktPhone.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         pktPhone.setForeground(Color.BLACK);
-        pktPhone.setText("Deliver Type");
+        pktPhone.setText("Phone");
         pktPhone.setBounds(495, 200, 250, 45);
         tPhone = new JTextField(10);
         tPhone.setBounds(495, 240, 250, 22);
