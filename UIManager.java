@@ -7,19 +7,22 @@ import java.util.Calendar;
 
 public class UIManager extends JFrame implements ActionListener {
     private JLabel add, delete;
-    private JLabel name, ssn, address, phone, drLicense, name2, ssn2;
-    private JLabel drLicense2, drLicense2Confirm, tracknum, status, from, to, statusLabel, senderLabel, receiverLabel;
+    private JLabel name, ssn, address, phone, pwd, drLicense2, ssn2, station2;
+    private JLabel tracknum, status, from, to, statusLabel, senderLabel, receiverLabel;
     private JLabel weight, weightLabel, clientNo, clientLabel, driverNo, driverLabel, courierNo, courierLabel;
 
-    private JTextField tName, tssn, taddress, tphone, tdrlicense;
-    private JTextField tName2, tssn2, tTrackNum;
+    private JTextField tName, tssn, taddress, tphone, tpwd;
+    private JTextField tDrL2, tssn2, tOffNo2, tTrackNum;
     private JButton btnAdd, btnDelete, btnTrack;
     private JLabel seperationV, seperationH;
-    private JCheckBox courier, driver;
+    private JCheckBox courier, driver, courier2, driver2;
 
     private Tracker tracker;
-    //private Manager manager;
+    private Manager manager;
     private String pktnum;
+    private String addName, addSSN, addAddress, addPhone, addPwd, addPosition, deleteDrL2, deleteSSN2, deleteStation2, deletePosition;
+    private UIAddCourier addCourier;
+    private UIAddDriver addDriver;
 
     private Connection con;
 
@@ -28,7 +31,7 @@ public class UIManager extends JFrame implements ActionListener {
     public UIManager(Connection con) {
         this.con = con;
         tracker = new Tracker(con);
-        //manager = new Manager(con);
+        manager = new Manager(con);
 
         add = new JLabel();
         add.setFont(new Font("Times New Roman", Font.BOLD, 15));
@@ -61,11 +64,11 @@ public class UIManager extends JFrame implements ActionListener {
         phone.setForeground(Color.BLACK);
         phone.setText("Phone");
         phone.setBounds(20, 180, 100, 45);
-        drLicense = new JLabel();
-        drLicense.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        drLicense.setForeground(Color.BLACK);
-        drLicense.setText("Dr License");
-        drLicense.setBounds(20, 220, 100, 45);
+        pwd = new JLabel();
+        pwd.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        pwd.setForeground(Color.BLACK);
+        pwd.setText("Password");
+        pwd.setBounds(20, 220, 100, 45);
 
         tName = new JTextField(10);
         tName.setBounds(120, 70, 120, 22);
@@ -79,15 +82,15 @@ public class UIManager extends JFrame implements ActionListener {
         tphone = new JTextField(10);
         tphone.setBounds(120, 190, 100, 22);
         tphone.setHorizontalAlignment(JLabel.CENTER);
-        tdrlicense = new JTextField(10);
-        tdrlicense.setBounds(120, 230, 120, 22);
-        tdrlicense.setHorizontalAlignment(JLabel.CENTER);
+        tpwd = new JTextField(10);
+        tpwd.setBounds(120, 230, 120, 22);
+        tpwd.setHorizontalAlignment(JLabel.CENTER);
 
-        name2 = new JLabel();
-        name2.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        name2.setForeground(Color.BLACK);
-        name2.setText("Name");
-        name2.setBounds(300, 60, 100, 45);
+        drLicense2 = new JLabel();
+        drLicense2.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        drLicense2.setForeground(Color.BLACK);
+        drLicense2.setText("Driver License");
+        drLicense2.setBounds(300, 60, 100, 45);
 
         ssn2 = new JLabel();
         ssn2.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -95,24 +98,21 @@ public class UIManager extends JFrame implements ActionListener {
         ssn2.setText("SSN");
         ssn2.setBounds(300, 100, 100, 45);
 
-        drLicense2 = new JLabel();
-        drLicense2.setFont(new Font("Times New Roman", Font.BOLD, 12));
-        drLicense2.setForeground(Color.BLACK);
-        drLicense2.setText("Dr License");
-        drLicense2.setBounds(300, 140, 100, 45);
+        station2 = new JLabel();
+        station2.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        station2.setForeground(Color.BLACK);
+        station2.setText("Office NO.");
+        station2.setBounds(300, 140, 100, 45);
 
-        drLicense2Confirm = new JLabel();
-        drLicense2Confirm.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        drLicense2Confirm.setForeground(Color.BLACK);
-        drLicense2Confirm.setText("0000000");
-        drLicense2Confirm.setBounds(440, 140, 100, 45);
-
-        tName2 = new JTextField(10);
-        tName2.setBounds(400, 70, 120, 22);
-        tName2.setHorizontalAlignment(JLabel.CENTER);
+        tDrL2 = new JTextField(10);
+        tDrL2.setBounds(400, 70, 120, 22);
+        tDrL2.setHorizontalAlignment(JLabel.CENTER);
         tssn2 = new JTextField(10);
-        tssn2.setBounds(400, 100, 120, 22);
+        tssn2.setBounds(400, 110, 120, 22);
         tssn2.setHorizontalAlignment(JLabel.CENTER);
+        tOffNo2 = new JTextField(10);
+        tOffNo2.setBounds(400, 150, 120, 22);
+        tOffNo2.setHorizontalAlignment(JLabel.CENTER);
 
         tracknum = new JLabel();
         tracknum.setFont(new Font("Times New Roman", Font.BOLD, 12));
@@ -180,6 +180,20 @@ public class UIManager extends JFrame implements ActionListener {
         driver.setBounds(140, 250, 100, 45);
         driver.addActionListener(this);
 
+        courier2 = new JCheckBox("Is Courier", false);
+        courier2.setBackground(Color.WHITE);
+        courier2.setForeground(Color.BLACK);
+        courier2.addActionListener(this);
+        courier2.setBounds(320, 172, 100, 45);
+        courier2.addActionListener(this);
+
+        driver2 = new JCheckBox("Is Driver", false);
+        driver2.setBackground(Color.WHITE);
+        driver2.setForeground(Color.BLACK);
+        driver2.addActionListener(this);
+        driver2.setBounds(420, 172, 100, 45);
+        driver2.addActionListener(this);
+
         btnAdd = new JButton("Confirm");
         btnAdd.setForeground(Color.BLACK);
         btnAdd.setBounds(80, 290, 120, 30);
@@ -206,16 +220,18 @@ public class UIManager extends JFrame implements ActionListener {
         panel.setLayout(null);
         panel.add(add);
         panel.add(delete);
-        panel.add(name); panel.add(ssn); panel.add(address); panel.add(phone); panel.add(drLicense);
-        panel.add(name2); panel.add(ssn2);
-        panel.add(drLicense2); panel.add(drLicense2Confirm);
+        panel.add(name); panel.add(ssn); panel.add(address); panel.add(phone); panel.add(pwd);
+        panel.add(drLicense2); panel.add(ssn2);panel.add(station2);
+
+
         panel.add(tracknum); panel.add(status); panel.add(from); panel.add(to);
         panel.add(statusLabel); panel.add(senderLabel); panel.add(receiverLabel);
-        panel.add(tName); panel.add(tssn); panel.add(taddress); panel.add(tphone); panel.add(tdrlicense);
-        panel.add(tName2); panel.add(tssn2); panel.add(tTrackNum);
+        panel.add(tName); panel.add(tssn); panel.add(taddress); panel.add(tphone); panel.add(tpwd);
+        panel.add(tDrL2); panel.add(tssn2); panel.add(tOffNo2);
+        panel.add(tTrackNum);
         panel.add(btnAdd); panel.add(btnDelete); panel.add(btnTrack);
         panel.add(seperationV); panel.add(seperationH);
-        panel.add(driver); panel.add(courier);
+        panel.add(driver); panel.add(courier); panel.add(driver2); panel.add(courier2);
 
         // Set properties of the JFrame
         setContentPane(panel);
@@ -231,12 +247,95 @@ public class UIManager extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         pktnum = tTrackNum.getText();
+        addName = tName.getText();
+
+        addSSN = tssn.getText();
+        //System.out.println(addSSN);
+        addAddress = taddress.getText().toString();
+        addPhone = tphone.getText().toString();
+        //System.out.println(addPhone);
+        addPwd = tpwd.getText().toString();
+
+        deleteDrL2 = tDrL2.getText();
+        deleteSSN2 = tssn2.getText();
+        deleteStation2 = tOffNo2.getText();
+
+        if (courier.isSelected() && driver.isSelected()) {
+            courier.setSelected(false); driver.setSelected(false);
+            ImageIcon img2 = new ImageIcon("13.jpg");
+            JOptionPane.showMessageDialog(null, "Please select one position.",
+                    "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+            return;
+        } else if (courier.isSelected()){
+            addPosition = "COURIER";
+        } else if (driver.isSelected()){
+            addPosition = "DRIVER";
+        }
+
+        if (courier2.isSelected() && driver2.isSelected()) {
+            courier2.setSelected(false); driver2.setSelected(false);
+            ImageIcon img2 = new ImageIcon("13.jpg");
+            JOptionPane.showMessageDialog(null, "Should be one position.",
+                    "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+            return;
+        } else if (courier2.isSelected()){
+            deletePosition = "COURIER";
+        } else if (driver2.isSelected()){
+            deletePosition = "DRIVER";
+        }
 
         if(e.getSource() == btnAdd){
+            if(addName.isEmpty() || addSSN.isEmpty() || addAddress.isEmpty() || addPhone.isEmpty() || addPwd.isEmpty()){
+                ImageIcon img2 = new ImageIcon("13.jpg");
+                JOptionPane.showMessageDialog(null, "Please complete the form before register",
+                        "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+                return;
+            } else if(addPwd.length() != 6){
+                ImageIcon img2 = new ImageIcon("13.jpg");
+                JOptionPane.showMessageDialog(null, "Please enter 6 digits password only contains numbers!",
+                        "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+                return;
+            }
+
+            boolean status =  manager.addEmployee(addPwd, addSSN, addAddress, addName, addPhone, addPosition);
+
+            if(status){
+                ImageIcon img1 = new ImageIcon("12.jpg");
+                JOptionPane.showMessageDialog(null, "Second Step!", "Success!",
+                        JOptionPane.INFORMATION_MESSAGE,img1);
+                this.dispose();
+            }else{
+                ImageIcon img2 = new ImageIcon("13.jpg");
+                JOptionPane.showMessageDialog(null, "OOPS! Register failed :(",
+                        "Failed", JOptionPane.WARNING_MESSAGE,img2);
+                return;
+            }
+
+            if (addPosition == "COURIER") {
+                addCourier = new UIAddCourier(con);
+                this.dispose();
+            } else if (addPosition == "DRIVER") {
+                addDriver = new UIAddDriver(con);
+                this.dispose();
+            }
 
         }
         if(e.getSource() == btnDelete){
+            if(deleteSSN2.isEmpty() || deleteDrL2.isEmpty() || deleteStation2.isEmpty()){
+                ImageIcon img2 = new ImageIcon("13.jpg");
+                JOptionPane.showMessageDialog(null, "Please complete the form before delete",
+                        "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+                return;
+            }
+            if (deletePosition == "COURIER") {
+                manager.deleteCourier(deleteSSN2, deleteDrL2, deleteStation2);
+            } else if (deletePosition == "DRIVER") {
+                manager.deleteDriver(deleteSSN2, deleteDrL2, deleteStation2);
+            }
 
+            ImageIcon img1 = new ImageIcon("12.jpg");
+            JOptionPane.showMessageDialog(null, "Employee have been fired!", "Success!", JOptionPane.INFORMATION_MESSAGE,img1);
+            this.dispose();
         }
         if(e.getSource() == btnTrack){
             tracker.track(pktnum);

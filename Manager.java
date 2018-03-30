@@ -23,8 +23,8 @@ public class Manager {
     public String position;
     private Connection con;
 
-    public Manager(String login, Connection con){
-        this.login = toInt(login);
+    public Manager(Connection con){
+        //this.login = toInt(login);
         this.con = con;
 
         PreparedStatement ps;
@@ -44,19 +44,21 @@ public class Manager {
         }
     }
 
-    public void addEmployee( String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
+    public boolean addEmployee(String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
         //todo
         try {
 
             PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO EMPLOYEE VALUES (?,?,?,?,?,?)");
             preparedStatement.setInt(1, Integer.parseInt(E_pass));
             preparedStatement.setInt(2, Integer.parseInt(E_SSN));
-            preparedStatement.setString(3, E_ADD);
+            preparedStatement.setLong(5, Long.parseLong(E_ADD));
             preparedStatement.setString(4, E_Name);
             preparedStatement.setInt(5, Integer.parseInt(E_PHNO));
             preparedStatement.setString(6, E_POS);
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
 
         } catch (SQLException ex) {
             System.out.println("Message: " + ex.getMessage());
@@ -67,10 +69,11 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+            return false;
         }
     }
 
-    public void addDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
+    public boolean addDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
             //todo
         try{
                         PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO DRIVER VALUES (?,?,?)");
@@ -80,6 +83,8 @@ public class Manager {
 
                         preparedStatement.executeUpdate();
                         preparedStatement.close();
+
+                        return true;
                     }
                 catch(SQLException ex)
                 {
@@ -94,11 +99,13 @@ public class Manager {
                                 System.out.println("Message: " + ex2.getMessage());
                         System.exit(-1);
                     }
+
+                    return false;
                 }
 
 
         }
-    public void deleteDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
+    public boolean deleteDriver(String DR_SSN, String DR_DRLN, String DR_OFF_NO){
         //todo
 
         try{
@@ -109,6 +116,8 @@ public class Manager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
         }
         catch(SQLException ex)
         {
@@ -123,11 +132,13 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
 
     }
 
-      public void addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+      public boolean addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
 
         try{
@@ -138,6 +149,8 @@ public class Manager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
         }
         catch(SQLException ex)
         {
@@ -152,11 +165,13 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
 
     }
     
-    public void deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+    public boolean deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
         try{
             PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO COURIER VALUES (?,?,?)");
@@ -166,6 +181,8 @@ public class Manager {
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
+
+            return true;
         }
         catch(SQLException ex)
         {
@@ -180,6 +197,8 @@ public class Manager {
                 System.out.println("Message: " + ex2.getMessage());
                 System.exit(-1);
             }
+
+            return false;
         }
     }
 

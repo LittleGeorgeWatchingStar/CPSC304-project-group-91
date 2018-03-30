@@ -327,7 +327,7 @@ public class UIRegister extends JFrame implements ActionListener {
                 this.dispose();
             }else{
                 ImageIcon img2 = new ImageIcon("13.jpg");
-                JOptionPane.showMessageDialog(null, "OOPS! Register faild :(",
+                JOptionPane.showMessageDialog(null, "OOPS! Register failed :(",
                         "Failed", JOptionPane.WARNING_MESSAGE,img2);
                 return;
             }
