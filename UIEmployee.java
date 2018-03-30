@@ -38,6 +38,7 @@ public class UIEmployee extends JFrame implements ActionListener{
     private String r5t = "N/A";
 
 
+
     public UIEmployee(Connection con, String pos, Courier courier) {
         this.con = con;
         this.courier = courier;
@@ -332,8 +333,8 @@ public class UIEmployee extends JFrame implements ActionListener{
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setLayout(null);
-        panel.add(hello);
-        panel.add(name);
+//        panel.add(hello);
+//        panel.add(name);
         panel.add(viewOrder);
         panel.add(status);
         panel.add(packagePanel);

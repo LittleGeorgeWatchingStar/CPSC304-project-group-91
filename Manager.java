@@ -47,21 +47,21 @@ public class Manager {
     public boolean addEmployee( String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
         //todo
         try {
-            int count = 1;
-            PreparedStatement ps = con.prepareStatement("COUNT(E_SSN) FROM EMPLOYEE WHERE E_SSN = ?");
-            ps.setInt(1,Integer.parseInt(E_SSN));
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                count = rs.getInt(1);
-            }
-            ps.close();
-            if(count == 0) {
+//            int count = 1;
+//            PreparedStatement ps = con.prepareStatement("COUNT(E_SSN) FROM EMPLOYEE WHERE E_SSN = ?");
+//            ps.setInt(1,Integer.parseInt(E_SSN));
+//            ResultSet rs = ps.executeQuery();
+//            while(rs.next()){
+//                count = rs.getInt(1);
+//            }
+//            ps.close();
+            if(true) {
                 PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO EMPLOYEE VALUES (?,?,?,?,?,?)");
-                preparedStatement.setInt(1, Integer.parseInt(E_pass));
-                preparedStatement.setInt(2, Integer.parseInt(E_SSN));
+                preparedStatement.setLong(1, Long.parseLong(E_pass));
+                preparedStatement.setLong(2, Long.parseLong(E_SSN));
                 preparedStatement.setString(3, E_ADD);
-                preparedStatement.setString(4, E_Name);
-                preparedStatement.setInt(5, Integer.parseInt(E_PHNO));
+                preparedStatement.setLong(4, Long.parseLong(E_PHNO));
+                preparedStatement.setString(5, E_Name);
                 preparedStatement.setString(6, E_POS);
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
@@ -236,42 +236,51 @@ public class Manager {
     }
 
 
-    public void findHeaviestAverageWeightByCourier(){
+    public int findHeaviestAverageWeightByCourier(){
+        int totalWeight = 1;
         try{
             PreparedStatement ps =con.prepareStatement("SELECT MAX (AVG (WEIGHT)) FROM  PACKAGES GROUP BY CO_SSN");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                int totalWeight = rs.getInt(1);
+                totalWeight = rs.getInt(1);
             }
             ps.close();
+            return totalWeight;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return totalWeight;
         }
     }
 
-    public void findMinimumtAverageWeightByCourier(){
+    public int findMinimumtAverageWeightByCourier(){
+        int minimumWeight= 1;
         try{
             PreparedStatement ps =con.prepareStatement("SELECT MIN (AVG (WEIGHT)) FROM  PACKAGES GROUP BY CO_SSN");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                int minimumWeight = rs.getInt(1);
+                minimumWeight = rs.getInt(1);
             }
             ps.close();
+            return minimumWeight;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return minimumWeight;
         }
     }
 
-    public void findMaximumPackageNumberByCourier(){
+    public int findMaximumPackageNumberByCourier(){
+        int Number =1;
         try{
             PreparedStatement ps =con.prepareStatement("SELECT MAX (COUNT (TRACKING_NO)) FROM  PACKAGES GROUP BY CO_SSN");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                int Number = rs.getInt(1);
+                Number = rs.getInt(1);
             }
             ps.close();
+            return Number;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return Number;
         }
     }
     

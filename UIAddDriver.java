@@ -6,9 +6,9 @@ import java.sql.Connection;
 
 public class UIAddDriver extends JFrame implements ActionListener {
     private JLabel add;
-    private JLabel name, ssn, drLicense, station;
+    private JLabel name, ssn, ssnToShow, drLicense, station;
 
-    private JTextField tName, tssn, tDrL, tStation;
+    private JTextField tName, tDrL, tStation;
     private JButton btnAdd;
 
     private Manager manager;
@@ -19,9 +19,10 @@ public class UIAddDriver extends JFrame implements ActionListener {
 
     private Client client;
 
-    public UIAddDriver(Connection con) {
+    public UIAddDriver(Connection con, String SSN) {
         this.con = con;
 
+        addSSN = SSN;
         manager = new Manager(con);
 
         add = new JLabel();
@@ -57,9 +58,14 @@ public class UIAddDriver extends JFrame implements ActionListener {
         tName = new JTextField(10);
         tName.setBounds(120, 70, 120, 22);
         tName.setHorizontalAlignment(JLabel.CENTER);
-        tssn = new JTextField(10);
-        tssn.setBounds(120, 110, 120, 22);
-        tssn.setHorizontalAlignment(JLabel.CENTER);
+
+
+        ssnToShow = new JLabel();
+        ssnToShow.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        ssnToShow.setForeground(Color.BLACK);
+        ssnToShow.setText(addSSN);
+        ssnToShow.setBounds(120, 100, 100, 45);
+
         tDrL = new JTextField(10);
         tDrL.setBounds(120, 150, 120, 22);
         tDrL.setHorizontalAlignment(JLabel.CENTER);
@@ -85,7 +91,7 @@ public class UIAddDriver extends JFrame implements ActionListener {
         panel.add(drLicense);
         panel.add(station);
         panel.add(tName);
-        panel.add(tssn);
+        panel.add(ssnToShow);
         panel.add(tDrL);
         panel.add(tStation);
         panel.add(btnAdd);
@@ -105,7 +111,7 @@ public class UIAddDriver extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         addName = tName.getText();
-        addSSN = tssn.getText();
+        //addSSN = tssn.getText();
         addDrL = tDrL.getText();
         addStation = tStation.getText();
 
