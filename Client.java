@@ -41,34 +41,6 @@ public class Client {
 
     }
 
-    public String placeOrder(String receiverName, String recieverAddress, String recieverPhoneNo,
-                           String weight, String DeliverType){
-        float weightNum = Float.parseFloat(weight);
-        int rPhone = toInt(recieverPhoneNo);
-        try {
-            PreparedStatement ps;
-            ps = con.prepareStatement("INSERT INTO PACKAGES VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setInt(1,trackingNUmGenerater());
-            ps.setString(2,recieverAddress);
-            ps.setString(3,receiverName);
-            ps.setInt(4,rPhone);
-            ps.setFloat(5,weightNum);
-            ps.setString(6,null);
-            ps.setInt(7, login);
-            ps.setString(8,null);
-            ps.setString(9,null);
-            ps.setString(10,null);
-            ps.setString(11,null);
-            ps.setString(12,null);
-            ps.setString(13,null);
-            ps.setString(14,null);
-            ps.execute();
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-            return "OOPS! Order failed due to technical issue!";
-        }
-        return "Order proceed!";
-    }
 
     private String trackOrder(String orderId){
         Tracker tracker = new Tracker(con);
@@ -76,27 +48,7 @@ public class Client {
         return tracker.status;
     }
 
-    private int trackingNUmGenerater(){
-        int trackingNum = 1200;
-        try{
-            PreparedStatement ps = con.prepareStatement("SELECT COUNT(TRACKING_NO) FROM PACKAGES");
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                trackingNum += rs.getInt(1)+1;
-            }
-        }catch(SQLException e){
-            try
-            {
-                con.rollback();
-            }
-            catch (SQLException ex2)
-            {
-                System.out.println("Message: " + ex2.getMessage());
-                System.exit(-1);
-            }
-        }
-        return trackingNum;
-    }
+
 
     public void viewOrders(){
         try{
