@@ -248,18 +248,14 @@ public class UIManager extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         pktnum = tTrackNum.getText();
         addName = tName.getText();
-
-        addSSN = tssn.getText();
-        //System.out.println(addSSN);
+        addSSN = tssn.getText().toString();
         addAddress = taddress.getText();
-
         addPhone = tphone.getText().toString();
-        //System.out.println(addPhone);
         addPwd = tpwd.getText().toString();
 
-        deleteDrL2 = tDrL2.getText();
-        deleteSSN2 = tssn2.getText();
-        deleteStation2 = tOffNo2.getText();
+        deleteDrL2 = tDrL2.getText().toString();
+        deleteSSN2 = tssn2.getText().toString();
+        deleteStation2 = tOffNo2.getText().toString();
 
         if (courier.isSelected() && driver.isSelected()) {
             courier.setSelected(false); driver.setSelected(false);
@@ -313,10 +309,10 @@ public class UIManager extends JFrame implements ActionListener {
             }
 
             if (addPosition == "COURIER") {
-                addCourier = new UIAddCourier(con);
+                addCourier = new UIAddCourier(con, addSSN);
                 this.dispose();
             } else if (addPosition == "DRIVER") {
-                addDriver = new UIAddDriver(con);
+                addDriver = new UIAddDriver(con, addSSN);
                 this.dispose();
             }
 
@@ -328,14 +324,29 @@ public class UIManager extends JFrame implements ActionListener {
                         "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
                 return;
             }
+
+            boolean status2 = false;
             if (deletePosition == "COURIER") {
-                manager.deleteCourier(deleteSSN2, deleteDrL2, deleteStation2);
+                status2= manager.deleteCourier(deleteSSN2, deleteDrL2, deleteStation2);
             } else if (deletePosition == "DRIVER") {
-                manager.deleteDriver(deleteSSN2, deleteDrL2, deleteStation2);
+                status2= manager.deleteDriver(deleteSSN2, deleteDrL2, deleteStation2);
+            }
+
+
+            if(status2){
+                ImageIcon img1 = new ImageIcon("12.jpg");
+                JOptionPane.showMessageDialog(null, "Employee have been fired!", "Success!",
+                        JOptionPane.INFORMATION_MESSAGE,img1);
+                this.dispose();
+            }else{
+                ImageIcon img2 = new ImageIcon("13.jpg");
+                JOptionPane.showMessageDialog(null, "OOPS! Register failed :(",
+                        "Failed", JOptionPane.WARNING_MESSAGE,img2);
+                return;
             }
 
             ImageIcon img1 = new ImageIcon("12.jpg");
-            JOptionPane.showMessageDialog(null, "Employee have been fired!", "Success!", JOptionPane.INFORMATION_MESSAGE,img1);
+            JOptionPane.showMessageDialog(null, "", "Success!", JOptionPane.INFORMATION_MESSAGE,img1);
             this.dispose();
         }
         if(e.getSource() == btnTrack){

@@ -47,21 +47,21 @@ public class Manager {
     public boolean addEmployee( String E_pass, String E_SSN, String E_ADD, String E_Name, String E_PHNO, String E_POS) {
         //todo
         try {
-            int count = 1;
-            PreparedStatement ps = con.prepareStatement("COUNT(E_SSN) FROM EMPLOYEE WHERE E_SSN = ?");
-            ps.setInt(1,Integer.parseInt(E_SSN));
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                count = rs.getInt(1);
-            }
-            ps.close();
-            if(count == 0) {
+//            int count = 1;
+//            PreparedStatement ps = con.prepareStatement("COUNT(E_SSN) FROM EMPLOYEE WHERE E_SSN = ?");
+//            ps.setInt(1,Integer.parseInt(E_SSN));
+//            ResultSet rs = ps.executeQuery();
+//            while(rs.next()){
+//                count = rs.getInt(1);
+//            }
+//            ps.close();
+            if(true) {
                 PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO EMPLOYEE VALUES (?,?,?,?,?,?)");
-                preparedStatement.setInt(1, Integer.parseInt(E_pass));
-                preparedStatement.setInt(2, Integer.parseInt(E_SSN));
+                preparedStatement.setLong(1, Long.parseLong(E_pass));
+                preparedStatement.setLong(2, Long.parseLong(E_SSN));
                 preparedStatement.setString(3, E_ADD);
-                preparedStatement.setString(4, E_Name);
-                preparedStatement.setInt(5, Integer.parseInt(E_PHNO));
+                preparedStatement.setLong(4, Long.parseLong(E_PHNO));
+                preparedStatement.setString(5, E_Name);
                 preparedStatement.setString(6, E_POS);
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
