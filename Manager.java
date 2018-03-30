@@ -236,42 +236,51 @@ public class Manager {
     }
 
 
-    public void findHeaviestAverageWeightByCourier(){
+    public int findHeaviestAverageWeightByCourier(){
+        int totalWeight = 1;
         try{
             PreparedStatement ps =con.prepareStatement("SELECT MAX (AVG (WEIGHT)) FROM  PACKAGES GROUP BY CO_SSN");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                int totalWeight = rs.getInt(1);
+                totalWeight = rs.getInt(1);
             }
             ps.close();
+            return totalWeight;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return totalWeight;
         }
     }
 
-    public void findMinimumtAverageWeightByCourier(){
+    public int findMinimumtAverageWeightByCourier(){
+        int minimumWeight= 1;
         try{
             PreparedStatement ps =con.prepareStatement("SELECT MIN (AVG (WEIGHT)) FROM  PACKAGES GROUP BY CO_SSN");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                int minimumWeight = rs.getInt(1);
+                minimumWeight = rs.getInt(1);
             }
             ps.close();
+            return minimumWeight;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return minimumWeight;
         }
     }
 
-    public void findMaximumPackageNumberByCourier(){
+    public int findMaximumPackageNumberByCourier(){
+        int Number =1;
         try{
             PreparedStatement ps =con.prepareStatement("SELECT MAX (COUNT (TRACKING_NO)) FROM  PACKAGES GROUP BY CO_SSN");
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                int Number = rs.getInt(1);
+                Number = rs.getInt(1);
             }
             ps.close();
+            return Number;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return Number;
         }
     }
     

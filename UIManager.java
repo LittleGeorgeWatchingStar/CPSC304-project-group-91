@@ -9,13 +9,13 @@ public class UIManager extends JFrame implements ActionListener {
     private JLabel add, delete;
     private JLabel name, ssn, address, phone, pwd, drLicense2, ssn2, station2;
     private JLabel tracknum, status, from, to, statusLabel, senderLabel, receiverLabel;
-    private JLabel weight, weightLabel, clientNo, clientLabel, driverNo, driverLabel, courierNo, courierLabel;
+    private JLabel weight, maxWeight, minWeight, weightShow, maxWeightShow, minWeightShow;
 
     private JTextField tName, tssn, taddress, tphone, tpwd;
     private JTextField tDrL2, tssn2, tOffNo2, tTrackNum;
-    private JButton btnAdd, btnDelete, btnTrack;
+    private JButton btnAdd, btnDelete, btnTrack, btnReport;
     private JLabel seperationV, seperationH;
-    private JCheckBox courier, driver, courier2, driver2;
+    private JCheckBox courier, driver, courier2, driver2, max, min;
 
     private Tracker tracker;
     private Manager manager;
@@ -23,6 +23,9 @@ public class UIManager extends JFrame implements ActionListener {
     private String addName, addSSN, addAddress, addPhone, addPwd, addPosition, deleteDrL2, deleteSSN2, deleteStation2, deletePosition;
     private UIAddCourier addCourier;
     private UIAddDriver addDriver;
+
+    private int heavy = 0, maxW = 0, minW = 0;
+    private String heavy2, maxW2, minW2;
 
     private Connection con;
 
@@ -118,15 +121,15 @@ public class UIManager extends JFrame implements ActionListener {
         tracknum.setFont(new Font("Times New Roman", Font.BOLD, 12));
         tracknum.setForeground(Color.BLACK);
         tracknum.setText("Track Number");
-        tracknum.setBounds(225, 340, 100, 45);
+        tracknum.setBounds(60, 340, 100, 45);
 
         tTrackNum = new JTextField(10);
-        tTrackNum.setBounds(180, 380, 180, 22);
+        tTrackNum.setBounds(20, 380, 180, 22);
         tTrackNum.setHorizontalAlignment(JLabel.CENTER);
 
         btnTrack = new JButton("Track");
         btnTrack.setForeground(Color.BLACK);
-        btnTrack.setBounds(210, 420, 120, 30);
+        btnTrack.setBounds(50, 420, 120, 30);
         btnTrack.setEnabled(true);
         btnTrack.addActionListener(this);
 
@@ -134,37 +137,37 @@ public class UIManager extends JFrame implements ActionListener {
         status.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         status.setForeground(Color.BLACK);
         status.setText("Status");
-        status.setBounds(200, 450, 100, 45);
+        status.setBounds(50, 450, 100, 45);
 
         from = new JLabel();
         from.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         from.setForeground(Color.BLACK);
         from.setText("From");
-        from.setBounds(200, 490, 100, 45);
+        from.setBounds(50, 490, 100, 45);
 
         to = new JLabel();
         to.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         to.setForeground(Color.BLACK);
         to.setText("To");
-        to.setBounds(200, 530, 100, 45);
+        to.setBounds(50, 530, 100, 45);
 
         statusLabel = new JLabel();
         statusLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         statusLabel.setForeground(Color.BLACK);
         statusLabel.setText("Unknown");
-        statusLabel.setBounds(300, 450, 150, 45);
+        statusLabel.setBounds(150, 450, 150, 45);
 
         senderLabel = new JLabel();
         senderLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         senderLabel.setForeground(Color.BLACK);
         senderLabel.setText("Unknown");
-        senderLabel.setBounds(300, 490, 150, 45);
+        senderLabel.setBounds(150, 490, 150, 45);
 
         receiverLabel = new JLabel();
         receiverLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
         receiverLabel.setForeground(Color.BLACK);
         receiverLabel.setText("Unknown");
-        receiverLabel.setBounds(300, 530, 150, 45);
+        receiverLabel.setBounds(150, 530, 150, 45);
 
         courier = new JCheckBox("As Courier", false);
         courier.setBackground(Color.WHITE);
@@ -193,6 +196,59 @@ public class UIManager extends JFrame implements ActionListener {
         driver2.addActionListener(this);
         driver2.setBounds(420, 172, 100, 45);
         driver2.addActionListener(this);
+
+        max = new JCheckBox("Max Pkg", false);
+        max.setBackground(Color.WHITE);
+        max.setForeground(Color.BLACK);
+        max.addActionListener(this);
+        max.setBounds(340, 360, 120, 45);
+        max.addActionListener(this);
+
+        min = new JCheckBox("Min Pkg", false);
+        min.setBackground(Color.WHITE);
+        min.setForeground(Color.BLACK);
+        min.addActionListener(this);
+        min.setBounds(440, 360, 120, 45);
+        min.addActionListener(this);
+
+        btnReport= new JButton("Report");
+        btnReport.setForeground(Color.BLACK);
+        btnReport.setBounds(380, 420, 120, 30);
+        btnReport.setEnabled(true);
+        btnReport.addActionListener(this);
+
+
+        weight = new JLabel();
+        weight.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        weight.setForeground(Color.BLACK);
+        weight.setText("Heaviest Average");
+        weight.setBounds(340, 450, 100, 45);
+        maxWeight = new JLabel();
+        maxWeight.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        maxWeight.setForeground(Color.BLACK);
+        maxWeight.setText("Max Weight");
+        maxWeight.setBounds(340, 530, 100, 45);
+        minWeight = new JLabel();
+        minWeight.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        minWeight.setForeground(Color.BLACK);
+        minWeight.setText("Min Weight");
+        minWeight.setBounds(340, 490, 100, 45);
+
+        weightShow = new JLabel();
+        weightShow.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        weightShow.setForeground(Color.BLACK);
+        weightShow.setText("0 kg");
+        weightShow.setBounds(440, 450, 100, 45);
+        maxWeightShow = new JLabel();
+        maxWeightShow.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        maxWeightShow.setForeground(Color.BLACK);
+        maxWeightShow.setText("0 kg");
+        maxWeightShow.setBounds(440, 530, 100, 45);
+        minWeightShow = new JLabel();
+        minWeightShow.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        minWeightShow.setForeground(Color.BLACK);
+        minWeightShow.setText("0 kg");
+        minWeightShow.setBounds(440, 490, 100, 45);
 
         btnAdd = new JButton("Confirm");
         btnAdd.setForeground(Color.BLACK);
@@ -232,6 +288,15 @@ public class UIManager extends JFrame implements ActionListener {
         panel.add(btnAdd); panel.add(btnDelete); panel.add(btnTrack);
         panel.add(seperationV); panel.add(seperationH);
         panel.add(driver); panel.add(courier); panel.add(driver2); panel.add(courier2);
+        panel.add(min);
+        panel.add(max);
+        panel.add(btnReport);
+        panel.add(weight);
+        panel.add(maxWeight);
+        panel.add(minWeight);
+        panel.add(weightShow);
+        panel.add(maxWeightShow);
+        panel.add(minWeightShow);
 
         // Set properties of the JFrame
         setContentPane(panel);
@@ -257,6 +322,27 @@ public class UIManager extends JFrame implements ActionListener {
         deleteSSN2 = tssn2.getText().toString();
         deleteStation2 = tOffNo2.getText().toString();
 
+
+
+        if (max.isSelected() && min.isSelected()) {
+            max.setSelected(false); min.setSelected(false);
+            ImageIcon img2 = new ImageIcon("13.jpg");
+            JOptionPane.showMessageDialog(null, "Please select one.",
+                    "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+            return;
+        } else if (max.isSelected()){
+            maxW = manager.findMaximumPackageNumberByCourier();
+        } else if (min.isSelected()){
+            minW = manager.findMinimumtAverageWeightByCourier();
+        }
+
+        if (e.getSource() == btnReport){
+            heavy = manager.findHeaviestAverageWeightByCourier();
+            weightShow.setText(""+heavy);
+            maxWeightShow.setText(""+maxW);
+            minWeightShow.setText(""+minW);
+        }
+        
         if (courier.isSelected() && driver.isSelected()) {
             courier.setSelected(false); driver.setSelected(false);
             ImageIcon img2 = new ImageIcon("13.jpg");

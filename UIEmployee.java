@@ -23,19 +23,19 @@ public class UIEmployee extends JFrame implements ActionListener{
     public UIEmployee(Connection con) {
         this.con = con;
 
-        hello = new JLabel();
-        hello.setFont(new Font("Times New Roman", Font.BOLD, 15));
-        hello.setForeground(Color.BLACK);
-        hello.setText("Hello");
-        hello.setBounds(20, 20, 50, 45);
-
-        name = new JLabel();
-        name.setFont(new Font("Times New Roman", Font.BOLD, 15));
-        name.setForeground(Color.BLACK);
-        //TODO
-        // name get from database
-        name.setText("Joe");
-        name.setBounds(60, 20, 150, 45);
+//        hello = new JLabel();
+//        hello.setFont(new Font("Times New Roman", Font.BOLD, 15));
+//        hello.setForeground(Color.BLACK);
+//        hello.setText("Hello");
+//        hello.setBounds(20, 20, 50, 45);
+//
+//        name = new JLabel();
+//        name.setFont(new Font("Times New Roman", Font.BOLD, 15));
+//        name.setForeground(Color.BLACK);
+//        //TODO
+//        // name get from database
+//        name.setText("Joe");
+//        name.setBounds(60, 20, 150, 45);
 
 
         viewOrder = new JLabel();
@@ -380,8 +380,8 @@ public class UIEmployee extends JFrame implements ActionListener{
         JPanel panel = new JPanel();
         panel.setBackground(Color.WHITE);
         panel.setLayout(null);
-        panel.add(hello);
-        panel.add(name);
+//        panel.add(hello);
+//        panel.add(name);
         panel.add(viewOrder);
         panel.add(status);
         panel.add(packagePanel);

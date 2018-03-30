@@ -13,6 +13,7 @@ public class Main extends JFrame implements ActionListener{
     private UIClient UIlogin;
     private TrackPackage trackpkg;
     private UIManager UImanager;
+    private UIEmployee employeePage;
 
 
     public static void main(String[] args) {
@@ -100,6 +101,7 @@ public class Main extends JFrame implements ActionListener{
         } else if (e.getSource() == employee) {
             EUIlogin = new UIbasic(connection);
             UImanager = new UIManager(connection);
+            employeePage = new UIEmployee(connection);
         } else if (e.getSource() == client) {
             UIlogin = new UIClient(connection);
         }
