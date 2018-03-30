@@ -133,8 +133,6 @@ public class UIClient extends JFrame implements ActionListener {
 
             UIReg = new UIRegister(con);
 
-
         }
     }
-
 }
