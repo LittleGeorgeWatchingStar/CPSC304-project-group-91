@@ -53,7 +53,11 @@ public class Register {
             preparedStatement.close();
         }catch(SQLException ex)
         {
-            System.out.println(ex.getMessage());
+            try {
+                con.rollback();
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
             return false;
         }
         return true;
