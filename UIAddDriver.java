@@ -117,10 +117,18 @@ public class UIAddDriver extends JFrame implements ActionListener {
                 return;
             }
 
-            manager.addDriver(addSSN,addDrL,addStation);
+            boolean status =  manager.addDriver(addSSN,addDrL,addStation);
 
-            ImageIcon img1 = new ImageIcon("12.jpg");
-            JOptionPane.showMessageDialog(null, "New employee "+ addName +" have been registered!", "Success!", JOptionPane.INFORMATION_MESSAGE,img1);
+            if(status){
+                ImageIcon img1 = new ImageIcon("12.jpg");
+                JOptionPane.showMessageDialog(null, "New employee "+ addName +" have been registered!", "Success!",
+                        JOptionPane.INFORMATION_MESSAGE,img1);
+            }else{
+                ImageIcon img2 = new ImageIcon("13.jpg");
+                JOptionPane.showMessageDialog(null, "OOPS! Register failed :(",
+                        "Failed", JOptionPane.WARNING_MESSAGE,img2);
+                return;
+            }
             this.dispose();
         }
 
