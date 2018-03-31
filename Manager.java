@@ -146,7 +146,7 @@ public class Manager {
 
     }
 
-      public boolean addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+      public boolean deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
 
         try{
@@ -179,7 +179,7 @@ public class Manager {
 
     }
     
-    public boolean deleteCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
+    public boolean addCourier(String CO_SSN, String CO_DLNO, String DEV_NO){
 
         try{
             PreparedStatement preparedStatement= con.prepareStatement ("INSERT INTO COURIER VALUES (?,?,?)");

@@ -100,8 +100,7 @@ public class Main extends JFrame implements ActionListener{
             trackpkg = new TrackPackage(connection);
         } else if (e.getSource() == employee) {
             EUIlogin = new UIbasic(connection);
-            UImanager = new UIManager(connection);
-            employeePage = new UIEmployee(connection);
+
         } else if (e.getSource() == client) {
             UIlogin = new UIClient(connection);
         }

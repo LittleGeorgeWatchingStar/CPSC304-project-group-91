@@ -93,31 +93,35 @@ public class UIbasic extends JFrame implements ActionListener {
         if (e.getSource() == btnsignin) {
             // 2017 Quan Zhang, David Chen all rights reserved
             try{
-                PreparedStatement ps = con.prepareStatement("SELECT E_PASSWORD, E_POSITION, E_NAME FROM EMPLOYEE WHERE E_SSN = ?");
+                PreparedStatement ps = con.prepareStatement("SELECT E_PASSWORD, E_POSITION FROM EMPLOYEE WHERE E_SSN = ?");
                 ps.setInt(1, Integer.parseInt(employeename));
                 ResultSet rs = ps.executeQuery();
 
 
-
+                String employeeType = "";
                 while(rs.next()){
                     if(rs.getInt(1) == Integer.parseInt(employeepwd)){
                         ImageIcon img1 = new ImageIcon("12.jpg");
                         JOptionPane.showMessageDialog(null, "Haha,yes", "JButton",
                                 JOptionPane.INFORMATION_MESSAGE,img1);
-                        String employeeType = rs.getString(2);
-                        if (employeeType == "Manager") {
-                            UImanager = new UIManager(con);
-                            this.dispose();
-                        } else {
-                            Courier courier = new Courier(employeename,employeepwd,con);
-                            employeePage = new UIEmployee(con, employeeType,courier);
-                            this.dispose();
-                        }
+                        employeeType = rs.getString(2);
+                        System.out.println(employeeType);
+
 
                     }else {
                         ImageIcon img2 = new ImageIcon("13.jpg");
                         JOptionPane.showMessageDialog(null, "Nope, wrong password",
                                 "Information Dialog", JOptionPane.WARNING_MESSAGE,img2);
+                    }
+
+
+                    if (employeeType.equals("MANAGER                                           ")) {
+                        UImanager = new UIManager(con);
+                        this.dispose();
+                    } else {
+                        Courier courier = new Courier(employeename,employeepwd,con);
+                        employeePage = new UIEmployee(con, employeeType,courier);
+                        this.dispose();
                     }
                 }
             }catch(SQLException ex){
